@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Session 1 — English Basics 101</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #f2c4ce;
+    --rose-deep: #d98fa0;
+    --rose-dark: #a85f72;
+    --blush: #fdf0f3;
+    --cream: #fdf8f4;
+    --warm-white: #fffcfa;
+    --sage: #b5c9b7;
+    --sage-deep: #7a9e7e;
+    --gold: #d4a853;
+    --gold-light: #f5e6c4;
+    --text-dark: #3a2a2e;
+    --text-mid: #7a5c64;
+    --text-light: #b08a93;
+    --border: #f0d8de;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text-dark); min-height: 100vh; }
+
+  nav {
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between; height: 56px;
+  }
+  .nav-brand { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--rose-dark); }
+  .nav-links { display: flex; gap: 1.5rem; }
+  .nav-links a { font-size: 13px; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--rose-dark); font-weight: 500; }
+
+  .hero {
+    background: var(--blush);
+    border-bottom: 1px solid var(--border);
+    padding: 4rem 2rem 3rem;
+    text-align: center;
+  }
+  .session-badge {
+    display: inline-block;
+    background: var(--rose);
+    color: var(--rose-dark);
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    padding: 4px 14px;
+    border-radius: 20px;
+    margin-bottom: 1rem;
+  }
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    font-weight: 600;
+    color: var(--text-dark);
+    line-height: 1.2;
+    margin-bottom: 0.5rem;
+  }
+  .hero h1 em { font-style: italic; color: var(--rose-dark); }
+  .hero-sub { font-size: 14px; color: var(--text-light); }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 3rem 2rem; }
+
+  .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--rose-dark); margin-bottom: 0.4rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 600; color: var(--text-dark); margin-bottom: 1.5rem; }
+
+  .divider { display: flex; align-items: center; gap: 1rem; margin: 2.5rem 0; color: var(--text-light); font-size: 12px; }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: var(--border); }
+
+  /* SESSION FLOW */
+  .session-flow {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+  }
+  .flow-item {
+    text-align: center;
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 1rem 0.8rem;
+    position: relative;
+  }
+  .flow-item.exam-item { border-color: var(--gold); background: var(--gold-light); }
+  .flow-item .fi-num {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: var(--rose-dark);
+    line-height: 1;
+  }
+  .flow-item.exam-item .fi-num { color: var(--gold); }
+  .flow-item .fi-label { font-size: 11px; color: var(--text-light); margin-top: 4px; }
+  .flow-item .fi-topic { font-size: 12px; color: var(--text-mid); margin-top: 4px; font-weight: 500; }
+
+  /* MEETING CARDS */
+  .meeting-card {
+    background: var(--warm-white);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    margin-bottom: 1.5rem;
+    overflow: hidden;
+  }
+  .meeting-header {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.2rem 1.5rem;
+    border-bottom: 1px solid var(--border);
+    cursor: pointer;
+    background: var(--warm-white);
+  }
+  .meeting-header:hover { background: var(--blush); }
+  .meeting-num {
+    width: 36px; height: 36px;
+    background: var(--blush);
+    border: 1px solid var(--border);
+    border-radius: 50%;
+    font-family: 'Playfair Display', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--rose-dark);
+    display: flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .meeting-num.exam { background: var(--gold-light); border-color: var(--gold); color: var(--gold); }
+  .meeting-header-text { flex: 1; }
+  .meeting-header-text h3 { font-size: 15px; font-weight: 500; color: var(--text-dark); }
+  .meeting-header-text p { font-size: 12px; color: var(--text-light); margin-top: 2px; }
+  .meeting-expand { font-size: 18px; color: var(--text-light); transition: transform 0.2s; }
+  .meeting-expand.open { transform: rotate(180deg); }
+
+  .meeting-body { display: none; padding: 1.5rem; }
+  .meeting-body.open { display: block; }
+
+  .goal-box {
+    background: var(--blush);
+    border-left: 3px solid var(--rose-deep);
+    border-radius: 0 8px 8px 0;
+    padding: 0.8rem 1rem;
+    margin-bottom: 1.2rem;
+    font-size: 13px;
+    color: var(--text-mid);
+  }
+  .goal-box strong { color: var(--rose-dark); }
+
+  /* TIMELINE */
+  .timeline { margin-bottom: 1.2rem; }
+  .tl-row {
+    display: grid;
+    grid-template-columns: 100px 1fr;
+    gap: 12px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    align-items: start;
+  }
+  .tl-row:last-child { border-bottom: none; }
+  .tl-time { color: var(--rose-dark); font-weight: 500; font-size: 12px; padding-top: 1px; }
+  .tl-activity { color: var(--text-mid); line-height: 1.5; }
+
+  /* BADGES ROW */
+  .badge-row { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 1rem; }
+  .badge {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+  .badge-vocab { background: var(--blush); color: var(--rose-dark); }
+  .badge-islamic { background: #edf5ee; color: var(--sage-deep); }
+  .badge-type { background: var(--gold-light); color: var(--gold); }
+
+  /* PART OF SPEECH PILLS */
+  .pos-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 1.5rem; }
+  .pos-pill {
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid;
+  }
+  .pos-noun { background: #fdeef2; color: #a85f72; border-color: var(--rose); }
+  .pos-pronoun { background: #f0effe; color: #6b5db5; border-color: #cdc7f4; }
+  .pos-adj { background: var(--gold-light); color: var(--gold); border-color: #e8c97a; }
+  .pos-verb { background: #edf5ee; color: var(--sage-deep); border-color: var(--sage); }
+
+  footer { text-align: center; padding: 2.5rem; border-top: 1px solid var(--border); background: var(--warm-white); font-size: 12px; color: var(--text-light); }
+  footer span { color: var(--rose-dark); }
+
+  .nav-pages { display: flex; justify-content: space-between; margin-top: 2rem; }
+  .nav-page-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    text-decoration: none;
+    font-size: 13px;
+    color: var(--rose-dark);
+    background: var(--blush);
+    border: 1px solid var(--border);
+    padding: 8px 16px;
+    border-radius: 8px;
+    transition: background 0.2s;
+  }
+  .nav-page-btn:hover { background: var(--rose); }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">✦ English Basics 101</div>
+  <div class="nav-links">
+    <a href="index.html">Overview</a>
+    <a href="session1.html" class="active">Session 1</a>
+    <a href="session2.html">Session 2</a>
+    <a href="exam.html">Exams</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="session-badge">Session 1 · Meetings 1–8</div>
+  <h1>The World <em>Around Us</em></h1>
+  <p class="hero-sub">Naming & Describing — Noun · Pronoun · Adjective · Verb</p>
+</div>
+
+<div class="container">
+
+  <div class="section-label">Parts of Speech Covered</div>
+  <div class="section-title">Session 1 Focus</div>
+
+  <div class="pos-row">
+    <span class="pos-pill pos-noun">Noun</span>
+    <span class="pos-pill pos-pronoun">Pronoun</span>
+    <span class="pos-pill pos-adj">Adjective</span>
+    <span class="pos-pill pos-verb">Verb</span>
+  </div>
+
+  <!-- SESSION FLOW -->
+  <div class="section-label">Session Structure</div>
+  <div class="section-title">8 Meetings at a Glance</div>
+  <div class="session-flow">
+    <div class="flow-item">
+      <div class="fi-num">1</div>
+      <div class="fi-topic">Introduction</div>
+      <div class="fi-label">Overview</div>
+    </div>
+    <div class="flow-item">
+      <div class="fi-num">2</div>
+      <div class="fi-topic">Nouns</div>
+      <div class="fi-label">Study</div>
+    </div>
+    <div class="flow-item">
+      <div class="fi-num">3</div>
+      <div class="fi-topic">Pronouns</div>
+      <div class="fi-label">Study</div>
+    </div>
+    <div class="flow-item">
+      <div class="fi-num">4</div>
+      <div class="fi-topic">Adjectives</div>
+      <div class="fi-label">Study</div>
+    </div>
+    <div class="flow-item">
+      <div class="fi-num">5</div>
+      <div class="fi-topic">Verbs</div>
+      <div class="fi-label">Study</div>
+    </div>
+    <div class="flow-item">
+      <div class="fi-num">6</div>
+      <div class="fi-topic">Review</div>
+      <div class="fi-label">All 4</div>
+    </div>
+    <div class="flow-item">
+      <div class="fi-num">7</div>
+      <div class="fi-topic">Exam Prep</div>
+      <div class="fi-label">Practice</div>
+    </div>
+    <div class="flow-item exam-item">
+      <div class="fi-num">8</div>
+      <div class="fi-topic">Exam</div>
+      <div class="fi-label">Assessment</div>
+    </div>
+  </div>
+
+  <div class="divider">✦</div>
+
+  <!-- MEETINGS -->
+  <div class="section-label">Detailed Lesson Plans</div>
+  <div class="section-title">Meeting Breakdown</div>
+
+  <!-- M1 -->
+  <div class="meeting-card">
+    <div class="meeting-header" onclick="toggle(this)">
+      <div class="meeting-num">1</div>
+      <div class="meeting-header-text">
+        <h3>Welcome & Introduction to Parts of Speech</h3>
+        <p>Overview · 60 minutes</p>
+      </div>
+      <div class="meeting-expand">▾</div>
+    </div>
+    <div class="meeting-body">
+      <div class="goal-box"><strong>Learning Goal:</strong> Students understand what "parts of speech" means and why it matters in English.</div>
+      <div class="timeline">
+        <div class="tl-row"><div class="tl-time">0 – 10 min</div><div class="tl-activity">Warm-up: Introduce yourself in English (name, where you're from)</div></div>
+        <div class="tl-row"><div class="tl-time">10 – 20 min</div><div class="tl-activity">Icebreaker: "How many English words do you know?" — group activity</div></div>
+        <div class="tl-row"><div class="tl-time">20 – 40 min</div><div class="tl-activity">Lesson: What are Parts of Speech? Overview of all 8 types with simple Islamic examples</div></div>
+        <div class="tl-row"><div class="tl-time">40 – 55 min</div><div class="tl-activity">Activity: Sort word cards into categories (guess the part of speech)</div></div>
+        <div class="tl-row"><div class="tl-time">55 – 60 min</div><div class="tl-activity">Closing: Recap + preview of next meeting</div></div>
+      </div>
+      <div class="badge-row">
+        <span class="badge badge-type">Overview</span>
+        <span class="badge badge-vocab">Key vocab: word, sentence, grammar, part of speech</span>
+        <span class="badge badge-islamic">🌙 Use: masjid, hijab, salah, Quran as example nouns</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- M2 -->
+  <div class="meeting-card">
+    <div class="meeting-header" onclick="toggle(this)">
+      <div class="meeting-num">2</div>
+      <div class="meeting-header-text">
+        <h3>Nouns</h3>
+        <p>Study Session · 60 minutes</p>
+      </div>
+      <div class="meeting-expand">▾</div>
+    </div>
+    <div class="meeting-body">
+      <div class="goal-box"><strong>Learning Goal:</strong> Students can identify and use nouns (person, place, thing, idea).</div>
+      <div class="timeline">
+        <div class="tl-row"><div class="tl-time">0 – 10 min</div><div class="tl-activity">Warm-up: "Name 5 things you see at home"</div></div>
+        <div class="tl-row"><div class="tl-time">10 – 30 min</div><div class="tl-activity">Lesson: What is a Noun? Types: common, proper, concrete, abstract</div></div>
+        <div class="tl-row"><div class="tl-time">30 – 45 min</div><div class="tl-activity">Activity: Noun hunt — find nouns in short Islamic sentences</div></div>
+        <div class="tl-row"><div class="tl-time">45 – 55 min</div><div class="tl-activity">Practice: Fill in the blank with the correct noun</div></div>
+        <div class="tl-row"><div class="tl-time">55 – 60 min</div><div class="tl-activity">Closing: Recap + homework preview</div></div>
+      </div>
+      <div class="badge-row">
+        <span class="badge badge-type">Noun</span>
+        <span class="badge badge-vocab">Key vocab: noun, person, place, thing, common noun, proper noun</span>
+        <span class="badge badge-islamic">🌙 Examples: Maryam, Makkah, Ramadan, patience (sabr)</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- M3 -->
+  <div class="meeting-card">
+    <div class="meeting-header" onclick="toggle(this)">
+      <div class="meeting-num">3</div>
+      <div class="meeting-header-text">
+        <h3>Pronouns</h3>
+        <p>Study Session · 60 minutes</p>
+      </div>
+      <div class="meeting-expand">▾</div>
+    </div>
+    <div class="meeting-body">
+      <div class="goal-box"><strong>Learning Goal:</strong> Students can replace nouns with the correct pronouns.</div>
+      <div class="timeline">
+        <div class="tl-row"><div class="tl-time">0 – 10 min</div><div class="tl-activity">Warm-up: Review nouns from last meeting</div></div>
+        <div class="tl-row"><div class="tl-time">10 – 30 min</div><div class="tl-activity">Lesson: What is a Pronoun? Subject & object pronouns (I, you, she, he, we, they, it)</div></div>
+        <div class="tl-row"><div class="tl-time">30 – 45 min</div><div class="tl-activity">Activity: Replace the noun with a pronoun — sentence substitution game</div></div>
+        <div class="tl-row"><div class="tl-time">45 – 55 min</div><div class="tl-activity">Practice: Pronoun matching worksheet</div></div>
+        <div class="tl-row"><div class="tl-time">55 – 60 min</div><div class="tl-activity">Closing: Recap</div></div>
+      </div>
+      <div class="badge-row">
+        <span class="badge badge-type">Pronoun</span>
+        <span class="badge badge-vocab">Key vocab: pronoun, subject, object, replace</span>
+        <span class="badge badge-islamic">🌙 "Fatimah loves reading the Quran. She reads every morning."</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- M4 -->
+  <div class="meeting-card">
+    <div class="meeting-header" onclick="toggle(this)">
+      <div class="meeting-num">4</div>
+      <div class="meeting-header-text">
+        <h3>Adjectives</h3>
+        <p>Study Session · 60 minutes</p>
+      </div>
+      <div class="meeting-expand">▾</div>
+    </div>
+    <div class="meeting-body">
+      <div class="goal-box"><strong>Learning Goal:</strong> Students can describe nouns using adjectives.</div>
+      <div class="timeline">
+        <div class="tl-row"><div class="tl-time">0 – 10 min</div><div class="tl-activity">Warm-up: "Describe your prayer mat in 3 words"</div></div>
+        <div class="tl-row"><div class="tl-time">10 – 30 min</div><div class="tl-activity">Lesson: What is an Adjective? Describing size, color, number, feeling</div></div>
+        <div class="tl-row"><div class="tl-time">30 – 45 min</div><div class="tl-activity">Activity: Describe the picture — students use adjectives to describe illustrated scenes</div></div>
+        <div class="tl-row"><div class="tl-time">45 – 55 min</div><div class="tl-activity">Practice: Add an adjective to each sentence</div></div>
+        <div class="tl-row"><div class="tl-time">55 – 60 min</div><div class="tl-activity">Closing: Recap</div></div>
+      </div>
+      <div class="badge-row">
+        <span class="badge badge-type">Adjective</span>
+        <span class="badge badge-vocab">Key vocab: adjective, describe, beautiful, kind, big, small</span>
+        <span class="badge badge-islamic">🌙 "The kind sister gave food to the poor." / "She wore a white hijab."</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- M5 -->
+  <div class="meeting-card">
+    <div class="meeting-header" onclick="toggle(this)">
+      <div class="meeting-num">5</div>
+      <div class="meeting-header-text">
+        <h3>Verbs</h3>
+        <p>Study Session · 60 minutes</p>
+      </div>
+      <div class="meeting-expand">▾</div>
+    </div>
+    <div class="meeting-body">
+      <div class="goal-box"><strong>Learning Goal:</strong> Students can identify action verbs and linking verbs in sentences.</div>
+      <div class="timeline">
+        <div class="tl-row"><div class="tl-time">0 – 10 min</div><div class="tl-activity">Warm-up: Act out a verb (charades-style)</div></div>
+        <div class="tl-row"><div class="tl-time">10 – 30 min</div><div class="tl-activity">Lesson: What is a Verb? Action verbs vs. linking verbs; simple present tense</div></div>
+        <div class="tl-row"><div class="tl-time">30 – 45 min</div><div class="tl-activity">Activity: Match the subject with the correct verb</div></div>
+        <div class="tl-row"><div class="tl-time">45 – 55 min</div><div class="tl-activity">Practice: Write 3 sentences about your daily routine using verbs</div></div>
+        <div class="tl-row"><div class="tl-time">55 – 60 min</div><div class="tl-activity">Closing: Recap</div></div>
+      </div>
+      <div class="badge-row">
+        <span class="badge badge-type">Verb</span>
+        <span class="badge badge-vocab">Key vocab: verb, action, state, present tense, daily routine</span>
+        <span class="badge badge-islamic">🌙 "She reads the Quran every morning." / "We pray five times a day."</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- M6 -->
+  <div class="meeting-card">
+    <div class="meeting-header" onclick="toggle(this)">
+      <div class="meeting-num">6</div>
+      <div class="meeting-header-text">
+        <h3>Review — Noun, Pronoun, Adjective, Verb</h3>
+        <p>Review Session · 60 minutes</p>
+      </div>
+      <div class="meeting-expand">▾</div>
+    </div>
+    <div class="meeting-body">
+      <div class="goal-box"><strong>Learning Goal:</strong> Students can identify and use all four parts of speech in context.</div>
+      <div class="timeline">
+        <div class="tl-row"><div class="tl-time">0 – 10 min</div><div class="tl-activity">Quick quiz: Identify the part of speech (oral, no pressure)</div></div>
+        <div class="tl-row"><div class="tl-time">10 – 30 min</div><div class="tl-activity">Review Lesson: Summary of Noun, Pronoun, Adjective, Verb with examples</div></div>
+        <div class="tl-row"><div class="tl-time">30 – 50 min</div><div class="tl-activity">Group Activity: Build sentences together using all 4 parts of speech</div></div>
+        <div class="tl-row"><div class="tl-time">50 – 58 min</div><div class="tl-activity">Q&A and clarification of any confusion</div></div>
+        <div class="tl-row"><div class="tl-time">58 – 60 min</div><div class="tl-activity">Closing: What to expect in the exam</div></div>
+      </div>
+      <div class="badge-row">
+        <span class="badge badge-type">Review</span>
+        <span class="badge badge-vocab">All 4 parts covered in integrated practice</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- M7 -->
+  <div class="meeting-card">
+    <div class="meeting-header" onclick="toggle(this)">
+      <div class="meeting-num">7</div>
+      <div class="meeting-header-text">
+        <h3>Extra Practice & Exam Preparation</h3>
+        <p>Exam Prep · 60 minutes</p>
+      </div>
+      <div class="meeting-expand">▾</div>
+    </div>
+    <div class="meeting-body">
+      <div class="goal-box"><strong>Learning Goal:</strong> Students feel confident and ready for the Session 1 exam.</div>
+      <div class="timeline">
+        <div class="tl-row"><div class="tl-time">0 – 10 min</div><div class="tl-activity">Warm-up: Fun vocabulary game</div></div>
+        <div class="tl-row"><div class="tl-time">10 – 30 min</div><div class="tl-activity">Guided practice: Exam-style questions with teacher walkthrough</div></div>
+        <div class="tl-row"><div class="tl-time">30 – 50 min</div><div class="tl-activity">Independent practice: Mini mock exam (ungraded)</div></div>
+        <div class="tl-row"><div class="tl-time">50 – 58 min</div><div class="tl-activity">Review answers together as a class</div></div>
+        <div class="tl-row"><div class="tl-time">58 – 60 min</div><div class="tl-activity">Pep talk + closing du'a</div></div>
+      </div>
+      <div class="badge-row">
+        <span class="badge badge-type">Exam Prep</span>
+        <span class="badge badge-islamic">🌙 Close with du'a for ease in learning</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- M8 EXAM -->
+  <div class="meeting-card">
+    <div class="meeting-header" onclick="toggle(this)">
+      <div class="meeting-num exam">8</div>
+      <div class="meeting-header-text">
+        <h3>Session 1 Exam</h3>
+        <p>Assessment · 60 minutes · Passing score: 60/100</p>
+      </div>
+      <div class="meeting-expand">▾</div>
+    </div>
+    <div class="meeting-body">
+      <div class="goal-box"><strong>Goal:</strong> Assess understanding of Noun, Pronoun, Adjective, and Verb.</div>
+      <div class="timeline">
+        <div class="tl-row"><div class="tl-time">Section A</div><div class="tl-activity">Identify the part of speech (underline / label) — 30 pts</div></div>
+        <div class="tl-row"><div class="tl-time">Section B</div><div class="tl-activity">Fill in the blank — 30 pts</div></div>
+        <div class="tl-row"><div class="tl-time">Section C</div><div class="tl-activity">Write your own sentences — 30 pts</div></div>
+        <div class="tl-row"><div class="tl-time">Bonus</div><div class="tl-activity">Islamic vocabulary challenge — 10 pts</div></div>
+      </div>
+      <div class="badge-row">
+        <span class="badge badge-type">Total: 100 pts</span>
+        <span class="badge badge-vocab">Passing: 60 / 100</span>
+        <span class="badge badge-islamic">🌙 Students below 60 receive remedial support</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="nav-pages">
+    <a href="index.html" class="nav-page-btn">← Course Overview</a>
+    <a href="session2.html" class="nav-page-btn">Session 2 →</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>English Basics 101 · <span>Al-Muslimah English Course</span> · Session 1</p>
+  <p style="margin-top: 4px;">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+</footer>
+
+<script>
+  function toggle(header) {
+    const body = header.nextElementSibling;
+    const arrow = header.querySelector('.meeting-expand');
+    body.classList.toggle('open');
+    arrow.classList.toggle('open');
+  }
+</script>
+</body>
+</html>

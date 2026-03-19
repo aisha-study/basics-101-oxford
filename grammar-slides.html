@@ -1,0 +1,1722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parts of Speech — Grammar Slides</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500;600&family=DM+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --rose: #f2c4ce;
+  --rose-deep: #d98fa0;
+  --rose-dark: #a85f72;
+  --blush: #fdf0f3;
+  --cream: #fdf8f4;
+  --warm-white: #fffcfa;
+  --sage: #b5c9b7;
+  --sage-deep: #7a9e7e;
+  --sage-light: #edf5ee;
+  --gold: #d4a853;
+  --gold-light: #f5e6c4;
+  --lavender: #e8e4f8;
+  --lav-deep: #8b7fcf;
+  --sky: #ddeef8;
+  --sky-deep: #4a89b8;
+  --peach: #fde8da;
+  --peach-deep: #c8703a;
+  --mint: #d8f0e8;
+  --mint-deep: #3a9e78;
+  --text-dark: #3a2a2e;
+  --text-mid: #7a5c64;
+  --text-light: #b08a93;
+  --border: #f0d8de;
+}
+
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'DM Sans', sans-serif;
+  background: #fdf4f0;
+  color: var(--text-dark);
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* TOP BAR */
+.top-bar {
+  background: #f9ece8;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 1.5rem;
+  height: 48px;
+  flex-shrink: 0;
+  border-bottom: 1px solid #f0d4cc;
+}
+.top-bar-brand {
+  font-family: 'Playfair Display', serif;
+  font-size: 13px;
+  color: var(--rose-dark);
+  letter-spacing: 0.02em;
+}
+.slide-counter {
+  font-size: 12px;
+  color: #c4909a;
+  font-family: 'DM Mono', monospace;
+}
+.top-nav { display: flex; align-items: center; gap: 6px; }
+.top-nav button {
+  background: #f2ddd8;
+  border: 1px solid #e8c8c0;
+  color: var(--rose-dark);
+  width: 32px; height: 32px;
+  border-radius: 6px;
+  font-size: 14px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  transition: background 0.15s;
+}
+.top-nav button:hover { background: #ead4ce; }
+.top-nav button:disabled { opacity: 0.3; cursor: not-allowed; }
+
+/* MAIN AREA */
+.main {
+  display: flex;
+  flex: 1;
+  min-height: 0;
+}
+
+/* SIDEBAR */
+.sidebar {
+  width: 200px;
+  background: #f9ece8;
+  border-right: 1px solid #f0d4cc;
+  overflow-y: auto;
+  flex-shrink: 0;
+  padding: 0.75rem 0;
+}
+.sidebar::-webkit-scrollbar { width: 4px; }
+.sidebar::-webkit-scrollbar-thumb { background: #f2ddd8; border-radius: 4px; }
+
+.sidebar-section {
+  padding: 4px 10px;
+  font-size: 9px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #d4a8b0;
+  margin-top: 8px;
+}
+.thumb {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  cursor: pointer;
+  border-left: 2px solid transparent;
+  transition: all 0.15s;
+}
+.thumb:hover { background: #fdf4f0; }
+.thumb.active { border-left-color: var(--rose-dark); background: #fdf4f0; }
+.thumb-num {
+  font-family: 'DM Mono', monospace;
+  font-size: 10px;
+  color: #c4909a;
+  width: 18px;
+  flex-shrink: 0;
+}
+.thumb.active .thumb-num { color: var(--rose-dark); }
+.thumb-label { font-size: 11px; color: #c09098; line-height: 1.3; }
+.thumb.active .thumb-label { color: var(--rose-dark); }
+
+/* SLIDE AREA */
+.slide-area {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  overflow: hidden;
+}
+
+.slide-frame {
+  width: 100%;
+  max-width: 860px;
+  aspect-ratio: 16/9;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 0 16px 60px rgba(180,120,130,0.18);
+}
+
+.slide { display: none; width: 100%; height: 100%; position: absolute; top: 0; left: 0; }
+.slide.active { display: flex; }
+
+/* ========== SLIDE DESIGNS ========== */
+
+/* COVER SLIDE */
+.slide-cover {
+  background: var(--cream);
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+.slide-cover::before {
+  content: '';
+  position: absolute;
+  top: -60px; right: -60px;
+  width: 300px; height: 300px;
+  background: var(--rose);
+  border-radius: 50%;
+  opacity: 0.18;
+}
+.slide-cover::after {
+  content: '';
+  position: absolute;
+  bottom: -80px; left: -80px;
+  width: 280px; height: 280px;
+  background: var(--sage);
+  border-radius: 50%;
+  opacity: 0.15;
+}
+.cover-tag {
+  font-size: clamp(8px, 1vw, 11px);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--rose-dark);
+  background: var(--blush);
+  padding: 4px 14px;
+  border-radius: 20px;
+  margin-bottom: 1rem;
+  position: relative; z-index: 1;
+}
+.cover-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(20px, 4vw, 42px);
+  font-weight: 600;
+  color: var(--text-dark);
+  line-height: 1.15;
+  position: relative; z-index: 1;
+  margin-bottom: 0.5rem;
+}
+.cover-title em { font-style: italic; color: var(--rose-dark); }
+.cover-sub {
+  font-size: clamp(9px, 1.2vw, 14px);
+  color: var(--text-light);
+  font-weight: 300;
+  position: relative; z-index: 1;
+  margin-bottom: 2rem;
+}
+.cover-pills {
+  display: flex; flex-wrap: wrap; gap: 6px; justify-content: center;
+  position: relative; z-index: 1;
+}
+.cover-pill {
+  font-size: clamp(8px, 0.9vw, 11px);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-weight: 500;
+  border: 1px solid;
+}
+
+/* CHAPTER DIVIDER */
+.slide-chapter {
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: clamp(24px, 4%, 48px);
+  position: relative;
+  overflow: hidden;
+}
+.chapter-num {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(60px, 12vw, 140px);
+  font-weight: 600;
+  line-height: 1;
+  position: absolute;
+  right: clamp(16px, 3%, 40px);
+  bottom: clamp(8px, 2%, 20px);
+  opacity: 0.08;
+  color: white;
+}
+.chapter-tag {
+  font-size: clamp(8px, 1vw, 11px);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 0.75rem;
+  font-weight: 500;
+}
+.chapter-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(18px, 3.5vw, 40px);
+  font-weight: 600;
+  line-height: 1.2;
+  color: white;
+  margin-bottom: 0.75rem;
+}
+.chapter-desc {
+  font-size: clamp(9px, 1.2vw, 14px);
+  color: rgba(255,255,255,0.65);
+  max-width: 60%;
+  line-height: 1.6;
+}
+
+/* CONTENT SLIDES */
+.slide-content {
+  flex-direction: column;
+  background: var(--warm-white);
+}
+.slide-header {
+  padding: clamp(12px, 2%, 20px) clamp(16px, 3%, 40px);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+.slide-header-dot {
+  width: 8px; height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.slide-header-label {
+  font-size: clamp(9px, 1vw, 12px);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+.slide-header-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(13px, 2vw, 22px);
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-left: auto;
+  text-align: right;
+}
+.slide-body {
+  flex: 1;
+  padding: clamp(12px, 2%, 24px) clamp(16px, 3%, 40px);
+  display: flex;
+  gap: clamp(12px, 2%, 24px);
+  overflow: hidden;
+  min-height: 0;
+}
+.slide-body.col { flex-direction: column; }
+.slide-body.row { flex-direction: row; }
+
+/* DEFINITION BOX */
+.def-box {
+  background: var(--blush);
+  border-left: 3px solid var(--rose-deep);
+  border-radius: 0 10px 10px 0;
+  padding: clamp(8px, 1.5%, 16px) clamp(10px, 2%, 20px);
+  margin-bottom: clamp(6px, 1%, 12px);
+}
+.def-box p {
+  font-size: clamp(9px, 1.2vw, 14px);
+  color: var(--text-mid);
+  line-height: 1.65;
+}
+.def-box.sage { background: var(--sage-light); border-left-color: var(--sage-deep); }
+.def-box.gold { background: var(--gold-light); border-left-color: var(--gold); }
+.def-box.lav { background: var(--lavender); border-left-color: var(--lav-deep); }
+.def-box.sky { background: var(--sky); border-left-color: var(--sky-deep); }
+.def-box.peach { background: var(--peach); border-left-color: var(--peach-deep); }
+.def-box.mint { background: var(--mint); border-left-color: var(--mint-deep); }
+
+/* EXAMPLE SENTENCE */
+.example {
+  background: #f7f3ff;
+  border-radius: 10px;
+  padding: clamp(6px, 1%, 12px) clamp(10px, 1.5%, 16px);
+  font-size: clamp(9px, 1.1vw, 13px);
+  color: var(--text-mid);
+  border: 1px solid #e0d8f8;
+  font-style: italic;
+  line-height: 1.5;
+  margin-bottom: clamp(4px, 0.5%, 8px);
+}
+.example strong { font-style: normal; color: var(--lav-deep); font-weight: 600; }
+.example.islamic { background: var(--sage-light); border-color: var(--sage); }
+.example.islamic strong { color: var(--sage-deep); }
+
+/* WORD CLASS GRID */
+.wc-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: clamp(5px, 0.8%, 10px);
+}
+.wc-card {
+  border-radius: 10px;
+  padding: clamp(6px, 1%, 12px) clamp(8px, 1%, 14px);
+  border: 1px solid transparent;
+}
+.wc-card .wc-type {
+  font-size: clamp(8px, 0.9vw, 11px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+.wc-card .wc-examples {
+  font-size: clamp(8px, 0.9vw, 11px);
+  line-height: 1.5;
+  font-family: 'DM Mono', monospace;
+}
+.wc-card .wc-note {
+  font-size: clamp(7px, 0.7vw, 9px);
+  margin-top: 4px;
+  opacity: 0.7;
+}
+
+/* noun */
+.wc-noun { background: #fdeef2; border-color: var(--rose); }
+.wc-noun .wc-type { color: var(--rose-dark); }
+.wc-noun .wc-examples { color: var(--text-mid); }
+/* verb */
+.wc-verb { background: var(--sage-light); border-color: var(--sage); }
+.wc-verb .wc-type { color: var(--sage-deep); }
+.wc-verb .wc-examples { color: var(--text-mid); }
+/* adj */
+.wc-adj { background: var(--gold-light); border-color: #e8c97a; }
+.wc-adj .wc-type { color: var(--gold); }
+.wc-adj .wc-examples { color: var(--text-mid); }
+/* adv */
+.wc-adv { background: var(--lavender); border-color: #cdc7f4; }
+.wc-adv .wc-type { color: var(--lav-deep); }
+.wc-adv .wc-examples { color: var(--text-mid); }
+/* prep */
+.wc-prep { background: var(--sky); border-color: #b5d4f0; }
+.wc-prep .wc-type { color: var(--sky-deep); }
+.wc-prep .wc-examples { color: var(--text-mid); }
+/* det */
+.wc-det { background: var(--peach); border-color: #f5c4a0; }
+.wc-det .wc-type { color: var(--peach-deep); }
+.wc-det .wc-examples { color: var(--text-mid); }
+/* pron */
+.wc-pron { background: var(--mint); border-color: #8ad4b8; }
+.wc-pron .wc-type { color: var(--mint-deep); }
+.wc-pron .wc-examples { color: var(--text-mid); }
+/* link */
+.wc-link { background: #f0f0f0; border-color: #d0d0d0; }
+.wc-link .wc-type { color: #666; }
+.wc-link .wc-examples { color: var(--text-mid); }
+
+/* SENTENCE LABEL */
+.sentence-demo {
+  background: var(--cream);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: clamp(10px, 1.5%, 18px) clamp(12px, 2%, 24px);
+  margin-bottom: clamp(6px, 1%, 12px);
+}
+.sentence-demo .sent-line {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: flex-end;
+  margin-bottom: 6px;
+}
+.sent-word {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+.sent-word .sw-label {
+  font-size: clamp(7px, 0.7vw, 9px);
+  color: var(--text-light);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+.sent-word .sw-word {
+  font-size: clamp(11px, 1.5vw, 18px);
+  font-weight: 500;
+  padding: 2px 6px;
+  border-radius: 6px;
+}
+
+/* TABLE */
+.grammar-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: clamp(9px, 1.1vw, 13px);
+}
+.grammar-table th {
+  background: var(--blush);
+  color: var(--rose-dark);
+  padding: clamp(5px, 0.8%, 10px) clamp(8px, 1%, 14px);
+  text-align: left;
+  font-size: clamp(8px, 0.9vw, 11px);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 500;
+}
+.grammar-table td {
+  padding: clamp(5px, 0.8%, 10px) clamp(8px, 1%, 14px);
+  border-bottom: 1px solid var(--border);
+  color: var(--text-mid);
+  line-height: 1.5;
+}
+.grammar-table td strong {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+.grammar-table .code {
+  font-family: 'DM Mono', monospace;
+  background: var(--blush);
+  padding: 1px 6px;
+  border-radius: 4px;
+  font-size: clamp(8px, 0.9vw, 11px);
+  color: var(--rose-dark);
+}
+
+/* POINT LIST */
+.point-list { list-style: none; }
+.point-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: clamp(4px, 0.6%, 8px) 0;
+  border-bottom: 1px solid var(--border);
+  font-size: clamp(9px, 1.1vw, 13px);
+  color: var(--text-mid);
+  line-height: 1.55;
+}
+.point-list li:last-child { border-bottom: none; }
+.point-dot {
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 600;
+  margin-top: 1px;
+}
+
+/* STRUCTURE BOX */
+.struct-box {
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: clamp(6px, 1%, 12px) clamp(10px, 1.5%, 16px);
+  background: var(--warm-white);
+  margin-bottom: clamp(4px, 0.5%, 8px);
+}
+.struct-box .struct-label {
+  font-size: clamp(8px, 0.9vw, 11px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  color: var(--rose-dark);
+  margin-bottom: 4px;
+}
+.struct-box .struct-parts {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.struct-part {
+  padding: 2px 8px;
+  border-radius: 6px;
+  font-size: clamp(8px, 0.9vw, 11px);
+  font-weight: 500;
+}
+.struct-arrow { color: var(--text-light); font-size: 12px; }
+.struct-box .struct-ex {
+  font-size: clamp(8px, 0.9vw, 11px);
+  color: var(--text-light);
+  margin-top: 4px;
+  font-style: italic;
+}
+
+/* ISLAMIC HIGHLIGHT */
+.islamic-box {
+  background: var(--sage-light);
+  border: 1px solid var(--sage);
+  border-radius: 10px;
+  padding: clamp(8px, 1%, 14px) clamp(10px, 1.5%, 18px);
+  margin-bottom: clamp(4px, 0.5%, 8px);
+}
+.islamic-box .ib-label {
+  font-size: clamp(8px, 0.8vw, 10px);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--sage-deep);
+  margin-bottom: 4px;
+}
+.islamic-box p {
+  font-size: clamp(9px, 1.1vw, 13px);
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+.islamic-box p strong { color: var(--sage-deep); font-style: italic; }
+
+/* TWO COLUMN */
+.col-half {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(6px, 1%, 12px);
+  min-width: 0;
+}
+
+/* TITLE in content */
+.content-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(13px, 2vw, 22px);
+  font-weight: 600;
+  color: var(--text-dark);
+  margin-bottom: clamp(6px, 1%, 12px);
+  line-height: 1.2;
+}
+.content-title em { font-style: italic; color: var(--rose-dark); }
+.content-subtitle {
+  font-size: clamp(8px, 0.9vw, 11px);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 4px;
+  font-weight: 500;
+}
+
+/* SLIDE FOOTER */
+.slide-footer {
+  padding: clamp(6px, 0.8%, 10px) clamp(16px, 3%, 40px);
+  border-top: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.slide-footer-left { font-size: clamp(8px, 0.8vw, 10px); color: var(--text-light); }
+.slide-footer-right { font-size: clamp(8px, 0.8vw, 10px); color: var(--text-light); font-family: 'DM Mono', monospace; }
+
+/* VERB FORM TABLE */
+.verb-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: clamp(5px, 0.8%, 10px);
+}
+.verb-card {
+  border-radius: 8px;
+  padding: clamp(6px, 1%, 12px);
+  text-align: center;
+}
+.verb-card .vc-label {
+  font-size: clamp(7px, 0.8vw, 10px);
+  text-transform: uppercase;
+  letter-spacing: 0.07em;
+  font-weight: 600;
+  margin-bottom: 4px;
+}
+.verb-card .vc-form {
+  font-family: 'DM Mono', monospace;
+  font-size: clamp(9px, 1.1vw, 13px);
+  font-weight: 500;
+}
+.verb-pos { background: var(--sage-light); border: 1px solid var(--sage); }
+.verb-pos .vc-label { color: var(--sage-deep); }
+.verb-neg { background: #fdeef2; border: 1px solid var(--rose); }
+.verb-neg .vc-label { color: var(--rose-dark); }
+.verb-q { background: var(--sky); border: 1px solid #b5d4f0; }
+.verb-q .vc-label { color: var(--sky-deep); }
+
+/* CHAPTER SLIDE COLORS */
+.ch-rose { background: linear-gradient(135deg, #d48090 0%, #f0b0bc 100%); }
+.ch-sage { background: linear-gradient(135deg, #6aaa88 0%, #8ecaaa 100%); }
+.ch-gold { background: linear-gradient(135deg, #c09840 0%, #dcc070 100%); }
+.ch-lav { background: linear-gradient(135deg, #8a78c0 0%, #b0a0e0 100%); }
+.ch-sky { background: linear-gradient(135deg, #4a88b8 0%, #70b0d8 100%); }
+.ch-peach { background: linear-gradient(135deg, #c87850 0%, #e8a880 100%); }
+.ch-mint { background: linear-gradient(135deg, #40a880 0%, #68c8a0 100%); }
+.ch-dark { background: linear-gradient(135deg, #c48090 0%, #e0a8b8 100%); }
+.ch-deep { background: linear-gradient(135deg, #9878a8 0%, #c0a0c8 100%); }
+
+/* BOTTOM CONTROLS */
+.bottom-bar {
+  background: #f9ece8;
+  border-top: 1px solid #f0d4cc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  padding: 0.6rem 1.5rem;
+  flex-shrink: 0;
+}
+.btn-nav {
+  background: #f2ddd8;
+  border: 1px solid #e8c8c0;
+  color: var(--rose-dark);
+  padding: 6px 20px;
+  border-radius: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  font-family: 'DM Sans', sans-serif;
+  transition: background 0.15s;
+  display: flex; align-items: center; gap: 6px;
+}
+.btn-nav:hover { background: #ead4ce; }
+.btn-nav:disabled { opacity: 0.3; cursor: not-allowed; }
+
+.progress-bar {
+  flex: 1;
+  max-width: 300px;
+  height: 3px;
+  background: #f2ddd8;
+  border-radius: 4px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--rose-deep);
+  border-radius: 4px;
+  transition: width 0.3s ease;
+}
+
+.slide-num-display {
+  font-family: 'DM Mono', monospace;
+  font-size: 11px;
+  color: #c4909a;
+  min-width: 60px;
+  text-align: center;
+}
+
+/* KEYBOARD HINT */
+.key-hint {
+  font-size: 10px;
+  color: #d4a8b0;
+}
+</style>
+</head>
+<body>
+
+<div class="top-bar">
+  <div class="top-bar-brand">✦ Parts of Speech — Oxford Practice Grammar</div>
+  <div class="top-nav">
+    <button onclick="goSlide(0)" title="First slide">«</button>
+    <button onclick="prevSlide()" id="btn-prev-top">‹</button>
+    <button onclick="nextSlide()" id="btn-next-top">›</button>
+    <button onclick="goSlide(totalSlides-1)" title="Last slide">»</button>
+  </div>
+  <div class="slide-counter" id="counter-top">1 / 1</div>
+</div>
+
+<div class="main">
+  <!-- SIDEBAR -->
+  <div class="sidebar" id="sidebar"></div>
+
+  <!-- SLIDES -->
+  <div class="slide-area">
+    <div class="slide-frame" id="slide-frame">
+
+      <!-- ============================
+           SLIDE 1: COVER
+      ============================= -->
+      <div class="slide slide-cover active">
+        <div class="cover-tag">Al-Muslimah English Course · English Basics 101</div>
+        <div class="cover-title">Parts of<br><em>Speech</em></div>
+        <div class="cover-sub">Oxford Practice Grammar · Units 1–3 · Session 1</div>
+        <div class="cover-pills">
+          <span class="cover-pill" style="background:#fdeef2;color:#a85f72;border-color:#f2c4ce">Noun</span>
+          <span class="cover-pill" style="background:#edf5ee;color:#7a9e7e;border-color:#b5c9b7">Verb</span>
+          <span class="cover-pill" style="background:#f5e6c4;color:#d4a853;border-color:#e8c97a">Adjective</span>
+          <span class="cover-pill" style="background:#e8e4f8;color:#8b7fcf;border-color:#cdc7f4">Adverb</span>
+          <span class="cover-pill" style="background:#ddeef8;color:#4a89b8;border-color:#b5d4f0">Preposition</span>
+          <span class="cover-pill" style="background:#fde8da;color:#c8703a;border-color:#f5c4a0">Determiner</span>
+          <span class="cover-pill" style="background:#d8f0e8;color:#3a9e78;border-color:#8ad4b8">Pronoun</span>
+          <span class="cover-pill" style="background:#f0f0f0;color:#666;border-color:#d0d0d0">Linking Word</span>
+        </div>
+      </div>
+
+      <!-- ============================
+           SLIDE 2: CHAPTER - Word Classes
+      ============================= -->
+      <div class="slide slide-chapter ch-rose">
+        <div class="chapter-num">1</div>
+        <div class="chapter-tag" style="color:rgba(255,255,255,0.7)">Unit 1</div>
+        <div class="chapter-title">Word Classes</div>
+        <div class="chapter-desc">Nouns, Verbs, Adjectives, and more — the 8 building blocks of every English sentence.</div>
+      </div>
+
+      <!-- ============================
+           SLIDE 3: 8 Word Classes Overview
+      ============================= -->
+      <div class="slide slide-content">
+        <div class="slide-header">
+          <div class="slide-header-dot" style="background:var(--rose-dark)"></div>
+          <div class="slide-header-label" style="color:var(--rose-dark)">Unit 1</div>
+          <div class="slide-header-title">The 8 Word Classes</div>
+        </div>
+        <div class="slide-body col">
+          <div class="def-box">
+            <p>Every word in English belongs to a <strong>word class</strong> (also called a "part of speech"). There are <strong>8 word classes</strong> in English. Knowing them helps you understand how sentences are built.</p>
+          </div>
+          <div class="wc-grid" style="flex:1;align-content:start">
+            <div class="wc-card wc-noun">
+              <div class="wc-type">Noun</div>
+              <div class="wc-examples">conference, work,<br>Makkah, Ramadan</div>
+              <div class="wc-note">persons, places, things, ideas</div>
+            </div>
+            <div class="wc-card wc-verb">
+              <div class="wc-type">Verb</div>
+              <div class="wc-examples">have, is, like,<br>pray, read, give</div>
+              <div class="wc-note">actions and states</div>
+            </div>
+            <div class="wc-card wc-adj">
+              <div class="wc-type">Adjective</div>
+              <div class="wc-examples">important, busy,<br>kind, beautiful</div>
+              <div class="wc-note">describes nouns</div>
+            </div>
+            <div class="wc-card wc-adv">
+              <div class="wc-type">Adverb</div>
+              <div class="wc-examples">tomorrow, quietly,<br>always, rather</div>
+              <div class="wc-note">describes verbs & adjectives</div>
+            </div>
+            <div class="wc-card wc-prep">
+              <div class="wc-type">Preposition</div>
+              <div class="wc-examples">at, to, on, in,<br>before, after</div>
+              <div class="wc-note">shows relationships</div>
+            </div>
+            <div class="wc-card wc-det">
+              <div class="wc-type">Determiner</div>
+              <div class="wc-examples">a, an, the, this,<br>our, some, every</div>
+              <div class="wc-note">comes before nouns</div>
+            </div>
+            <div class="wc-card wc-pron">
+              <div class="wc-type">Pronoun</div>
+              <div class="wc-examples">I, you, she, he,<br>we, they, it</div>
+              <div class="wc-note">replaces nouns</div>
+            </div>
+            <div class="wc-card wc-link">
+              <div class="wc-type">Linking Word</div>
+              <div class="wc-examples">so, and, but,<br>because, or</div>
+              <div class="wc-note">connects ideas</div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-footer-left">Oxford Practice Grammar — Unit 1B</div>
+          <div class="slide-footer-right">✦</div>
+        </div>
+      </div>
+
+      <!-- ============================
+           SLIDE 4: Sentence Demo
+      ============================= -->
+      <div class="slide slide-content">
+        <div class="slide-header">
+          <div class="slide-header-dot" style="background:var(--rose-dark)"></div>
+          <div class="slide-header-label" style="color:var(--rose-dark)">Unit 1A</div>
+          <div class="slide-header-title">Words in a Sentence</div>
+        </div>
+        <div class="slide-body col">
+          <div class="content-subtitle" style="color:var(--rose-dark)">See how word classes appear in a real sentence</div>
+          <div class="sentence-demo">
+            <div class="sent-line">
+              <div class="sent-word">
+                <div class="sw-label">Pronoun</div>
+                <div class="sw-word" style="background:#d8f0e8;color:#3a9e78">I</div>
+              </div>
+              <div class="sent-word">
+                <div class="sw-label">Verb</div>
+                <div class="sw-word" style="background:#edf5ee;color:#7a9e7e">have</div>
+              </div>
+              <div class="sent-word">
+                <div class="sw-label">Determiner</div>
+                <div class="sw-word" style="background:#fde8da;color:#c8703a">an</div>
+              </div>
+              <div class="sent-word">
+                <div class="sw-label">Adjective</div>
+                <div class="sw-word" style="background:#f5e6c4;color:#b08020">important</div>
+              </div>
+              <div class="sent-word">
+                <div class="sw-label">Noun</div>
+                <div class="sw-word" style="background:#fdeef2;color:#a85f72">conference</div>
+              </div>
+              <div class="sent-word">
+                <div class="sw-label">Preposition</div>
+                <div class="sw-word" style="background:#ddeef8;color:#4a89b8">at</div>
+              </div>
+              <div class="sent-word">
+                <div class="sw-label">Noun</div>
+                <div class="sw-word" style="background:#fdeef2;color:#a85f72">work</div>
+              </div>
+              <div class="sent-word">
+                <div class="sw-label">Adverb</div>
+                <div class="sw-word" style="background:#e8e4f8;color:#8b7fcf">tomorrow</div>
+              </div>
+            </div>
+            <div style="font-size:clamp(14px,2.2vw,22px);font-weight:500;color:var(--text-dark);margin-top:8px;">I have an important conference at work tomorrow.</div>
+          </div>
+          <div class="sentence-demo">
+            <div class="sent-line">
+              <div class="sent-word">
+                <div class="sw-label">Link. Word</div>
+                <div class="sw-word" style="background:#f0f0f0;color:#666">So</div>
+              </div>
+              <div class="sent-word">
+                <div class="sw-label">Pronoun</div>
+                <div class="sw-word" style="background:#d8f0e8;color:#3a9e78">I</div>
+              </div>
+              <div class="sent-word">
+                <div class="sw-label">Verb</div>
+                <div class="sw-word" style="background:#edf5ee;color:#7a9e7e">am</div>
+              </div>
+              <div class="sent-word">
+                <div class="sw-label">Adverb</div>
+                <div class="sw-word" style="background:#e8e4f8;color:#8b7fcf">rather</div>
+              </div>
+              <div class="sent-word">
+                <div class="sw-label">Adjective</div>
+                <div class="sw-word" style="background:#f5e6c4;color:#b08020">busy</div>
+              </div>
+            </div>
+            <div style="font-size:clamp(14px,2.2vw,22px);font-weight:500;color:var(--text-dark);margin-top:8px;">So I am rather busy.</div>
+          </div>
+          <div class="islamic-box">
+            <div class="ib-label">🌙 Islamic Example</div>
+            <p>The <strong>kind</strong> sister <strong>read</strong> the <strong>Quran</strong> <strong>quietly</strong> <strong>in</strong> the <strong>masjid</strong> <strong>today</strong>.<br>
+            <span style="font-size:clamp(8px,0.9vw,11px);color:var(--sage-deep)">(Adj · Noun · Verb · Noun · Adv · Prep · Det · Noun · Adv)</span></p>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-footer-left">Oxford Practice Grammar — Unit 1A</div>
+          <div class="slide-footer-right">✦</div>
+        </div>
+      </div>
+
+      <!-- ============================
+           SLIDE 5: Words can change class
+      ============================= -->
+      <div class="slide slide-content">
+        <div class="slide-header">
+          <div class="slide-header-dot" style="background:var(--rose-dark)"></div>
+          <div class="slide-header-label" style="color:var(--rose-dark)">Unit 1C</div>
+          <div class="slide-header-title">One Word, Different Classes</div>
+        </div>
+        <div class="slide-body col">
+          <div class="def-box">
+            <p>Some words can belong to <strong>different classes</strong> depending on how they are used in a sentence. Always look at the <em>role</em> a word plays, not just the word itself.</p>
+          </div>
+          <div class="slide-body row" style="padding:0;gap:clamp(8px,1.5%,16px);flex:1">
+            <div class="col-half">
+              <div class="content-subtitle" style="color:var(--sage-deep)">As a VERB</div>
+              <div class="example">Can I <strong>look</strong> at your photos?</div>
+              <div class="example">We <strong>work</strong> on Saturday morning.</div>
+              <div class="example">She <strong>prays</strong> five times a day.</div>
+            </div>
+            <div class="col-half">
+              <div class="content-subtitle" style="color:var(--rose-dark)">As a NOUN</div>
+              <div class="example">I like the <strong>look</strong> of that coat.</div>
+              <div class="example">I'll be at <strong>work</strong> tomorrow.</div>
+              <div class="example">Her daily <strong>prayer</strong> gives her peace.</div>
+            </div>
+          </div>
+          <div class="islamic-box">
+            <div class="ib-label">🌙 Tip</div>
+            <p>Ask yourself: <strong>what is this word doing in the sentence?</strong> Is it naming something (noun), describing an action (verb), or describing another word (adjective / adverb)?</p>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-footer-left">Oxford Practice Grammar — Unit 1C</div>
+          <div class="slide-footer-right">✦</div>
+        </div>
+      </div>
+
+      <!-- ============================
+           SLIDE 6: CHAPTER - Sentence Structure
+      ============================= -->
+      <div class="slide slide-chapter ch-sage">
+        <div class="chapter-num">2</div>
+        <div class="chapter-tag" style="color:rgba(255,255,255,0.7)">Unit 2</div>
+        <div class="chapter-title">Sentence Structure</div>
+        <div class="chapter-desc">Subject, Verb, Object, Complement, and Adverbial — the five parts that build every English sentence.</div>
+      </div>
+
+      <!-- ============================
+           SLIDE 7: 5 Sentence Structures
+      ============================= -->
+      <div class="slide slide-content">
+        <div class="slide-header">
+          <div class="slide-header-dot" style="background:var(--sage-deep)"></div>
+          <div class="slide-header-label" style="color:var(--sage-deep)">Unit 2A</div>
+          <div class="slide-header-title">Five Main Sentence Structures</div>
+        </div>
+        <div class="slide-body col">
+          <div class="def-box sage">
+            <p>Every English sentence has a <strong>subject</strong> and a <strong>verb</strong>. We can then add more parts to it. There are 5 main structures.</p>
+          </div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:clamp(4px,0.6%,8px)">
+            <div class="struct-box">
+              <div class="struct-label">1. Subject + Verb</div>
+              <div class="struct-parts">
+                <span class="struct-part" style="background:#d8f0e8;color:#3a9e78">Subject</span>
+                <span class="struct-arrow">+</span>
+                <span class="struct-part" style="background:#edf5ee;color:#7a9e7e">Verb</span>
+              </div>
+              <div class="struct-ex">My arms are aching. · Something happened.</div>
+            </div>
+            <div class="struct-box">
+              <div class="struct-label">2. Subject + Verb + Object</div>
+              <div class="struct-parts">
+                <span class="struct-part" style="background:#d8f0e8;color:#3a9e78">Subject</span>
+                <span class="struct-arrow">+</span>
+                <span class="struct-part" style="background:#edf5ee;color:#7a9e7e">Verb</span>
+                <span class="struct-arrow">+</span>
+                <span class="struct-part" style="background:#fdeef2;color:#a85f72">Object</span>
+              </div>
+              <div class="struct-ex">I need a rest. · She reads the Quran.</div>
+            </div>
+            <div class="struct-box">
+              <div class="struct-label">3. Subject + Verb + Complement</div>
+              <div class="struct-parts">
+                <span class="struct-part" style="background:#d8f0e8;color:#3a9e78">Subject</span>
+                <span class="struct-arrow">+</span>
+                <span class="struct-part" style="background:#edf5ee;color:#7a9e7e">Verb</span>
+                <span class="struct-arrow">+</span>
+                <span class="struct-part" style="background:#f5e6c4;color:#b08020">Complement</span>
+              </div>
+              <div class="struct-ex">This piano is heavy. · She is kind. (adj or noun phrase)</div>
+            </div>
+            <div class="struct-box">
+              <div class="struct-label">4. Subject + Verb + Adverbial</div>
+              <div class="struct-parts">
+                <span class="struct-part" style="background:#d8f0e8;color:#3a9e78">Subject</span>
+                <span class="struct-arrow">+</span>
+                <span class="struct-part" style="background:#edf5ee;color:#7a9e7e">Verb</span>
+                <span class="struct-arrow">+</span>
+                <span class="struct-part" style="background:#e8e4f8;color:#8b7fcf">Adverbial</span>
+              </div>
+              <div class="struct-ex">It is on my foot. · Iftar is after Maghrib.</div>
+            </div>
+            <div class="struct-box">
+              <div class="struct-label">5. Subject + Verb + Object + Object</div>
+              <div class="struct-parts">
+                <span class="struct-part" style="background:#d8f0e8;color:#3a9e78">Subject</span>
+                <span class="struct-arrow">+</span>
+                <span class="struct-part" style="background:#edf5ee;color:#7a9e7e">Verb</span>
+                <span class="struct-arrow">+</span>
+                <span class="struct-part" style="background:#fdeef2;color:#a85f72">Indirect Obj</span>
+                <span class="struct-arrow">+</span>
+                <span class="struct-part" style="background:#fde8da;color:#c8703a">Direct Obj</span>
+              </div>
+              <div class="struct-ex">David bought Melanie a present. · She gave her sister a gift.</div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-footer-left">Oxford Practice Grammar — Unit 2A</div>
+          <div class="slide-footer-right">✦</div>
+        </div>
+      </div>
+
+      <!-- ============================
+           SLIDE 8: Adverbials
+      ============================= -->
+      <div class="slide slide-content">
+        <div class="slide-header">
+          <div class="slide-header-dot" style="background:var(--sage-deep)"></div>
+          <div class="slide-header-label" style="color:var(--sage-deep)">Unit 2B</div>
+          <div class="slide-header-title">Adverbials</div>
+        </div>
+        <div class="slide-body col">
+          <div class="def-box sage">
+            <p>We can add <strong>adverbials</strong> to <em>all five sentence structures</em>. An adverbial can be a prepositional phrase (e.g. <em>on my foot</em>) or an adverb (e.g. <em>nearby</em>).</p>
+          </div>
+          <ul class="point-list" style="flex:1">
+            <li>
+              <div class="point-dot" style="background:#edf5ee;color:#7a9e7e">1</div>
+              My arms are aching <strong style="color:var(--sage-deep)">terribly</strong>. <span style="font-size:0.85em;color:var(--text-light)">(adverb)</span>
+            </li>
+            <li>
+              <div class="point-dot" style="background:#edf5ee;color:#7a9e7e">2</div>
+              I <strong style="color:var(--sage-deep)">really</strong> need a rest. <span style="font-size:0.85em;color:var(--text-light)">(adverb before verb)</span>
+            </li>
+            <li>
+              <div class="point-dot" style="background:#edf5ee;color:#7a9e7e">3</div>
+              <strong style="color:var(--sage-deep)">Of course</strong> this piano is heavy. <span style="font-size:0.85em;color:var(--text-light)">(phrase at start)</span>
+            </li>
+            <li>
+              <div class="point-dot" style="background:#edf5ee;color:#7a9e7e">4</div>
+              <strong style="color:var(--sage-deep)">Fortunately</strong>, their house is nearby. <span style="font-size:0.85em;color:var(--text-light)">(adverb at start)</span>
+            </li>
+            <li>
+              <div class="point-dot" style="background:#edf5ee;color:#7a9e7e">5</div>
+              David bought Melanie a present <strong style="color:var(--sage-deep)">yesterday</strong>. <span style="font-size:0.85em;color:var(--text-light)">(adverb at end)</span>
+            </li>
+          </ul>
+          <div class="islamic-box">
+            <div class="ib-label">🌙 Islamic Examples</div>
+            <p>She prays <strong>quietly</strong> in her room. · <strong>Alhamdulillah</strong>, the class went well. · We break our fast <strong>after Maghrib</strong>.</p>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-footer-left">Oxford Practice Grammar — Unit 2B</div>
+          <div class="slide-footer-right">✦</div>
+        </div>
+      </div>
+
+      <!-- ============================
+           SLIDE 9: CHAPTER - Direct & Indirect Objects
+      ============================= -->
+      <div class="slide slide-chapter ch-gold">
+        <div class="chapter-num">3</div>
+        <div class="chapter-tag" style="color:rgba(255,255,255,0.75)">Unit 3</div>
+        <div class="chapter-title">Direct &amp; Indirect Objects</div>
+        <div class="chapter-desc">When a verb has two objects — who receives it, and what is received.</div>
+      </div>
+
+      <!-- ============================
+           SLIDE 10: Direct & Indirect
+      ============================= -->
+      <div class="slide slide-content">
+        <div class="slide-header">
+          <div class="slide-header-dot" style="background:var(--gold)"></div>
+          <div class="slide-header-label" style="color:var(--gold)">Unit 3A</div>
+          <div class="slide-header-title">Two Objects after a Verb</div>
+        </div>
+        <div class="slide-body col">
+          <div class="def-box gold">
+            <p>Some verbs (give, send, buy, tell, show...) can take <strong>two objects</strong>: an <strong>indirect object</strong> (the person receiving) and a <strong>direct object</strong> (the thing given).</p>
+          </div>
+          <table class="grammar-table">
+            <thead>
+              <tr><th>Indirect Object first</th><th>Direct Object first (use to / for)</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Henry gave <strong>Claire</strong> some flowers.</td>
+                <td>Henry gave some flowers <strong>to Claire</strong>.</td>
+              </tr>
+              <tr>
+                <td>Emma gave <strong>Rachel</strong> a CD.</td>
+                <td>Emma gave the CD <strong>to Rachel</strong>.</td>
+              </tr>
+              <tr>
+                <td>I'll send <strong>my cousin</strong> a postcard.</td>
+                <td>I'll send a postcard <strong>to my cousin</strong>.</td>
+              </tr>
+              <tr>
+                <td>She gave <strong>her sister</strong> a gift.</td>
+                <td>She gave a gift <strong>to her sister</strong>.</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="slide-body row" style="padding:0;gap:clamp(8px,1.5%,16px);margin-top:auto">
+            <div class="col-half">
+              <div class="def-box gold">
+                <p><strong>TO</strong> verbs: give, send, show, tell, lend, offer, teach, write, pass, pay, bring, read</p>
+              </div>
+            </div>
+            <div class="col-half">
+              <div class="def-box" style="background:#fde8da;border-left-color:#c8703a">
+                <p><strong>FOR</strong> verbs: buy, make, book, cook, find, get, save, order, fetch, choose, build</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-footer-left">Oxford Practice Grammar — Unit 3A–B</div>
+          <div class="slide-footer-right">✦</div>
+        </div>
+      </div>
+
+      <!-- ============================
+           SLIDE 11: CHAPTER - Nouns Deep Dive
+      ============================= -->
+      <div class="slide slide-chapter ch-rose">
+        <div class="chapter-num">N</div>
+        <div class="chapter-tag" style="color:rgba(255,255,255,0.7)">Deep Dive</div>
+        <div class="chapter-title">Nouns</div>
+        <div class="chapter-desc">People, places, things, and ideas — the most common word class in English.</div>
+      </div>
+
+      <!-- ============================
+           SLIDE 12: Nouns
+      ============================= -->
+      <div class="slide slide-content">
+        <div class="slide-header">
+          <div class="slide-header-dot" style="background:var(--rose-dark)"></div>
+          <div class="slide-header-label" style="color:var(--rose-dark)">Nouns</div>
+          <div class="slide-header-title">Types of Nouns</div>
+        </div>
+        <div class="slide-body col">
+          <div class="def-box">
+            <p>A <strong>noun</strong> names a person, place, thing, or idea. It is usually the subject or object of a sentence.</p>
+          </div>
+          <div class="slide-body row" style="padding:0;gap:clamp(8px,1.5%,16px);flex:1">
+            <div class="col-half">
+              <ul class="point-list">
+                <li><div class="point-dot" style="background:#fdeef2;color:#a85f72">✦</div><div><strong>Common Noun</strong><br><span style="font-size:0.9em">General names — city, book, sister, teacher</span></div></li>
+                <li><div class="point-dot" style="background:#fdeef2;color:#a85f72">✦</div><div><strong>Proper Noun</strong><br><span style="font-size:0.9em">Specific names — Maryam, Makkah, Ramadan</span></div></li>
+                <li><div class="point-dot" style="background:#fdeef2;color:#a85f72">✦</div><div><strong>Concrete Noun</strong><br><span style="font-size:0.9em">Things you can touch — Quran, hijab, masjid</span></div></li>
+                <li><div class="point-dot" style="background:#fdeef2;color:#a85f72">✦</div><div><strong>Abstract Noun</strong><br><span style="font-size:0.9em">Ideas & feelings — patience (sabr), love, faith</span></div></li>
+              </ul>
+            </div>
+            <div class="col-half">
+              <div class="islamic-box" style="margin-bottom:clamp(6px,1%,12px)">
+                <div class="ib-label">🌙 Islamic Nouns</div>
+                <p><strong>Maryam</strong> — proper noun (person)<br>
+                <strong>Makkah</strong> — proper noun (place)<br>
+                <strong>Quran</strong> — concrete noun (thing)<br>
+                <strong>Sabr (patience)</strong> — abstract noun (idea)</p>
+              </div>
+              <div class="example">
+                <strong>Maryam</strong> read the <strong>Quran</strong> every morning in her <strong>room</strong>.
+              </div>
+              <div class="example">
+                <strong>Ramadan</strong> teaches us <strong>patience</strong> and <strong>gratitude</strong>.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-footer-left">Nouns — Units 76–82</div>
+          <div class="slide-footer-right">✦</div>
+        </div>
+      </div>
+
+      <!-- ============================
+           SLIDE 13: CHAPTER - Verbs
+      ============================= -->
+      <div class="slide slide-chapter ch-sage">
+        <div class="chapter-num">V</div>
+        <div class="chapter-tag" style="color:rgba(255,255,255,0.7)">Deep Dive</div>
+        <div class="chapter-title">Verbs</div>
+        <div class="chapter-desc">Action verbs and linking verbs — the engine of every sentence.</div>
+      </div>
+
+      <!-- ============================
+           SLIDE 14: Verbs — Present Continuous
+      ============================= -->
+      <div class="slide slide-content">
+        <div class="slide-header">
+          <div class="slide-header-dot" style="background:var(--sage-deep)"></div>
+          <div class="slide-header-label" style="color:var(--sage-deep)">Verbs · Unit 4</div>
+          <div class="slide-header-title">The Present Continuous</div>
+        </div>
+        <div class="slide-body col">
+          <div class="def-box sage">
+            <p>The <strong>present continuous</strong> means we are <em>in the middle of an action</em> right now. Form: <strong>am/is/are + verb-ing</strong></p>
+          </div>
+          <div class="verb-grid">
+            <div class="verb-card verb-pos">
+              <div class="vc-label">Positive</div>
+              <div class="vc-form" style="color:var(--sage-deep)">I am looking<br>She is reading<br>They are praying</div>
+            </div>
+            <div class="verb-card verb-neg">
+              <div class="vc-label">Negative</div>
+              <div class="vc-form" style="color:var(--rose-dark)">I'm not looking<br>She isn't reading<br>They aren't praying</div>
+            </div>
+            <div class="verb-card verb-q">
+              <div class="vc-label">Question</div>
+              <div class="vc-form" style="color:var(--sky-deep)">Am I looking?<br>Is she reading?<br>Are they praying?</div>
+            </div>
+          </div>
+          <div class="example islamic" style="margin-top:clamp(6px,1%,12px)">She <strong>is reciting</strong> the Quran right now.</div>
+          <div class="example islamic">We <strong>are learning</strong> English to better understand Islamic texts.</div>
+          <div class="def-box sage" style="margin-top:auto">
+            <p><strong>When to use it:</strong> Something happening NOW · something temporary · something changing over time (e.g. <em>My English is getting better!</em>)</p>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-footer-left">Oxford Practice Grammar — Unit 4</div>
+          <div class="slide-footer-right">✦</div>
+        </div>
+      </div>
+
+      <!-- ============================
+           SLIDE 15: Present Simple
+      ============================= -->
+      <div class="slide slide-content">
+        <div class="slide-header">
+          <div class="slide-header-dot" style="background:var(--sage-deep)"></div>
+          <div class="slide-header-label" style="color:var(--sage-deep)">Verbs · Unit 5</div>
+          <div class="slide-header-title">The Present Simple</div>
+        </div>
+        <div class="slide-body col">
+          <div class="def-box sage">
+            <p>The <strong>present simple</strong> is used for: <em>thoughts & feelings, habits & routines, facts & permanent truths.</em> Form: base verb (+s/es for he/she/it)</p>
+          </div>
+          <table class="grammar-table" style="flex:0 0 auto">
+            <thead>
+              <tr><th>Subject</th><th>Positive</th><th>Negative</th><th>Question</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>I / you / we / they</td>
+                <td class="code">pray</td>
+                <td class="code">don't pray</td>
+                <td class="code">Do you pray?</td>
+              </tr>
+              <tr>
+                <td>he / she / it</td>
+                <td class="code">pray<strong>s</strong></td>
+                <td class="code">doesn't pray</td>
+                <td class="code">Does she pray?</td>
+              </tr>
+            </tbody>
+          </table>
+          <div class="slide-body row" style="padding:0;gap:clamp(8px,1.5%,16px);flex:1;margin-top:clamp(6px,1%,12px)">
+            <div class="col-half">
+              <div class="content-subtitle" style="color:var(--sage-deep)">Use it for:</div>
+              <ul class="point-list">
+                <li><div class="point-dot" style="background:#edf5ee;color:#7a9e7e">✦</div>Thoughts & feelings: <em>I believe, I love</em></li>
+                <li><div class="point-dot" style="background:#edf5ee;color:#7a9e7e">✦</div>Habits: <em>We pray five times a day</em></li>
+                <li><div class="point-dot" style="background:#edf5ee;color:#7a9e7e">✦</div>Facts: <em>The sun rises in the east</em></li>
+              </ul>
+            </div>
+            <div class="col-half">
+              <div class="islamic-box">
+                <div class="ib-label">🌙 Islamic Examples</div>
+                <p>She <strong>reads</strong> the Quran every morning.<br>
+                We <strong>pray</strong> five times a day.<br>
+                Muslims <strong>fast</strong> during Ramadan.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-footer-left">Oxford Practice Grammar — Unit 5</div>
+          <div class="slide-footer-right">✦</div>
+        </div>
+      </div>
+
+      <!-- ============================
+           SLIDE 16: CHAPTER - Adjectives
+      ============================= -->
+      <div class="slide slide-chapter ch-gold">
+        <div class="chapter-num">Adj</div>
+        <div class="chapter-tag" style="color:rgba(255,255,255,0.7)">Deep Dive</div>
+        <div class="chapter-title">Adjectives</div>
+        <div class="chapter-desc">Words that describe nouns — colour, size, feeling, and more.</div>
+      </div>
+
+      <!-- ============================
+           SLIDE 17: Adjectives
+      ============================= -->
+      <div class="slide slide-content">
+        <div class="slide-header">
+          <div class="slide-header-dot" style="background:var(--gold)"></div>
+          <div class="slide-header-label" style="color:var(--gold)">Adjectives</div>
+          <div class="slide-header-title">Describing Nouns</div>
+        </div>
+        <div class="slide-body col">
+          <div class="def-box gold">
+            <p>An <strong>adjective</strong> describes or modifies a noun. It tells us about <em>size, colour, feeling, number, opinion</em>, and more. Adjectives usually come <strong>before the noun</strong> or <strong>after linking verbs</strong> (be, seem, look, feel).</p>
+          </div>
+          <div class="slide-body row" style="padding:0;gap:clamp(8px,1.5%,16px);flex:1">
+            <div class="col-half">
+              <div class="content-subtitle" style="color:var(--gold)">Before a noun</div>
+              <div class="example">a <strong>kind</strong> sister</div>
+              <div class="example">a <strong>beautiful</strong> recitation</div>
+              <div class="example">the <strong>white</strong> hijab</div>
+              <div class="example">an <strong>important</strong> lesson</div>
+              <div class="example" style="margin-top:clamp(6px,1%,12px)">The <strong>generous</strong> sister gave food to the poor.</div>
+            </div>
+            <div class="col-half">
+              <div class="content-subtitle" style="color:var(--gold)">After a linking verb</div>
+              <div class="example">The class is <strong>wonderful</strong>.</div>
+              <div class="example">Her recitation sounds <strong>beautiful</strong>.</div>
+              <div class="example">The students feel <strong>confident</strong>.</div>
+              <div class="example">This exercise seems <strong>easy</strong>.</div>
+              <div class="islamic-box" style="margin-top:clamp(6px,1%,12px)">
+                <div class="ib-label">🌙 Islamic Examples</div>
+                <p>Ramadan is a <strong>blessed</strong> month.<br>
+                She is <strong>patient</strong> and <strong>grateful</strong>.<br>
+                The masjid looks <strong>peaceful</strong>.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-footer-left">Adjectives — Units 104–109</div>
+          <div class="slide-footer-right">✦</div>
+        </div>
+      </div>
+
+      <!-- ============================
+           SLIDE 18: CHAPTER - Adverbs
+      ============================= -->
+      <div class="slide slide-chapter ch-lav">
+        <div class="chapter-num">Adv</div>
+        <div class="chapter-tag" style="color:rgba(255,255,255,0.7)">Deep Dive</div>
+        <div class="chapter-title">Adverbs</div>
+        <div class="chapter-desc">Words that describe verbs, adjectives, or other adverbs — how, when, where, how often.</div>
+      </div>
+
+      <!-- ============================
+           SLIDE 19: Adverbs
+      ============================= -->
+      <div class="slide slide-content">
+        <div class="slide-header">
+          <div class="slide-header-dot" style="background:var(--lav-deep)"></div>
+          <div class="slide-header-label" style="color:var(--lav-deep)">Adverbs</div>
+          <div class="slide-header-title">Types of Adverbs</div>
+        </div>
+        <div class="slide-body col">
+          <div class="def-box lav">
+            <p>An <strong>adverb</strong> modifies a <em>verb, adjective, or another adverb</em>. Many adverbs are formed by adding <strong>-ly</strong> to an adjective.</p>
+          </div>
+          <table class="grammar-table">
+            <thead><tr><th>Type</th><th>Questions it answers</th><th>Examples</th></tr></thead>
+            <tbody>
+              <tr><td><strong>Manner</strong></td><td>How?</td><td class="code">quietly, slowly, carefully, loudly</td></tr>
+              <tr><td><strong>Time</strong></td><td>When?</td><td class="code">today, now, yesterday, soon</td></tr>
+              <tr><td><strong>Frequency</strong></td><td>How often?</td><td class="code">always, never, often, daily</td></tr>
+              <tr><td><strong>Place</strong></td><td>Where?</td><td class="code">here, there, nearby, outside</td></tr>
+              <tr><td><strong>Degree</strong></td><td>How much?</td><td class="code">very, quite, rather, too, enough</td></tr>
+            </tbody>
+          </table>
+          <div class="islamic-box" style="margin-top:clamp(6px,1%,12px)">
+            <div class="ib-label">🌙 Islamic Examples</div>
+            <p>She <strong>quietly</strong> recited the Quran. · We <strong>always</strong> greet with Salam. · He prays <strong>five times</strong> daily. · She speaks <strong>very</strong> kindly to others.</p>
+          </div>
+          <div class="example" style="margin-top:clamp(4px,0.5%,8px)">Adjective → Adverb: <strong>quiet</strong> → <strong>quietly</strong> · <strong>beautiful</strong> → <strong>beautifully</strong> · <strong>patient</strong> → <strong>patiently</strong></div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-footer-left">Adverbs — Units 113–117</div>
+          <div class="slide-footer-right">✦</div>
+        </div>
+      </div>
+
+      <!-- ============================
+           SLIDE 20: CHAPTER - Prepositions
+      ============================= -->
+      <div class="slide slide-chapter ch-sky">
+        <div class="chapter-num">Pre</div>
+        <div class="chapter-tag" style="color:rgba(255,255,255,0.7)">Deep Dive</div>
+        <div class="chapter-title">Prepositions</div>
+        <div class="chapter-desc">Words that show the relationship between a noun and another word — place, time, direction.</div>
+      </div>
+
+      <!-- ============================
+           SLIDE 21: Prepositions
+      ============================= -->
+      <div class="slide slide-content">
+        <div class="slide-header">
+          <div class="slide-header-dot" style="background:var(--sky-deep)"></div>
+          <div class="slide-header-label" style="color:var(--sky-deep)">Prepositions</div>
+          <div class="slide-header-title">Prepositions of Place & Time</div>
+        </div>
+        <div class="slide-body col">
+          <div class="def-box sky">
+            <p>A <strong>preposition</strong> shows the relationship between a noun/pronoun and another word. Common prepositions: <strong>in, on, at, under, beside, between, before, after, behind, above</strong></p>
+          </div>
+          <div class="slide-body row" style="padding:0;gap:clamp(8px,1.5%,16px);flex:1">
+            <div class="col-half">
+              <div class="content-subtitle" style="color:var(--sky-deep)">Prepositions of Place</div>
+              <div class="example">The prayer mat is <strong>on</strong> the floor.</div>
+              <div class="example">She sat <strong>beside</strong> her sister.</div>
+              <div class="example">The Quran is <strong>in</strong> the bag.</div>
+              <div class="example">The masjid is <strong>between</strong> the two shops.</div>
+            </div>
+            <div class="col-half">
+              <div class="content-subtitle" style="color:var(--sky-deep)">Prepositions of Time</div>
+              <div class="example">Iftar is <strong>after</strong> Maghrib.</div>
+              <div class="example">Suhoor is <strong>before</strong> Fajr.</div>
+              <div class="example">Class starts <strong>at</strong> 8 o'clock.</div>
+              <div class="example">We fast <strong>in</strong> Ramadan.</div>
+            </div>
+          </div>
+          <div class="islamic-box">
+            <div class="ib-label">🌙 Quick Tip</div>
+            <p><strong>in</strong> — inside spaces, months, years · <strong>on</strong> — surfaces, days · <strong>at</strong> — specific points, times · <strong>before / after</strong> — sequence of events</p>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-footer-left">Prepositions — Units 118–125</div>
+          <div class="slide-footer-right">✦</div>
+        </div>
+      </div>
+
+      <!-- ============================
+           SLIDE 22: CHAPTER - Pronouns
+      ============================= -->
+      <div class="slide slide-chapter ch-mint">
+        <div class="chapter-num">Pro</div>
+        <div class="chapter-tag" style="color:rgba(255,255,255,0.7)">Deep Dive</div>
+        <div class="chapter-title">Pronouns</div>
+        <div class="chapter-desc">Words that replace nouns — I, you, she, he, we, they, it.</div>
+      </div>
+
+      <!-- ============================
+           SLIDE 23: Pronouns
+      ============================= -->
+      <div class="slide slide-content">
+        <div class="slide-header">
+          <div class="slide-header-dot" style="background:var(--mint-deep)"></div>
+          <div class="slide-header-label" style="color:var(--mint-deep)">Pronouns</div>
+          <div class="slide-header-title">Personal Pronouns</div>
+        </div>
+        <div class="slide-body col">
+          <div class="def-box mint">
+            <p>A <strong>pronoun</strong> replaces a noun so we don't repeat it. We use <strong>subject pronouns</strong> before the verb and <strong>object pronouns</strong> after the verb.</p>
+          </div>
+          <table class="grammar-table">
+            <thead><tr><th>Person</th><th>Subject Pronoun</th><th>Object Pronoun</th></tr></thead>
+            <tbody>
+              <tr><td>1st singular</td><td class="code">I</td><td class="code">me</td></tr>
+              <tr><td>2nd singular / plural</td><td class="code">you</td><td class="code">you</td></tr>
+              <tr><td>3rd singular (female)</td><td class="code">she</td><td class="code">her</td></tr>
+              <tr><td>3rd singular (male)</td><td class="code">he</td><td class="code">him</td></tr>
+              <tr><td>3rd singular (thing)</td><td class="code">it</td><td class="code">it</td></tr>
+              <tr><td>1st plural</td><td class="code">we</td><td class="code">us</td></tr>
+              <tr><td>3rd plural</td><td class="code">they</td><td class="code">them</td></tr>
+            </tbody>
+          </table>
+          <div class="islamic-box" style="margin-top:clamp(6px,1%,12px)">
+            <div class="ib-label">🌙 Islamic Examples</div>
+            <p><strong>Fatimah</strong> loves reading the Quran. <strong>She</strong> reads it every morning.<br>
+            The teacher explained the lesson. We understood <strong>it</strong> very well.<br>
+            The sisters are kind. I love spending time with <strong>them</strong>.</p>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-footer-left">Pronouns — Units 98–103</div>
+          <div class="slide-footer-right">✦</div>
+        </div>
+      </div>
+
+      <!-- ============================
+           SLIDE 24: CHAPTER - Conjunctions & Interjections
+      ============================= -->
+      <div class="slide slide-chapter ch-peach">
+        <div class="chapter-num">C+I</div>
+        <div class="chapter-tag" style="color:rgba(255,255,255,0.7)">Deep Dive</div>
+        <div class="chapter-title">Conjunctions &amp; Interjections</div>
+        <div class="chapter-desc">Linking words that connect ideas, and expressions that show emotion.</div>
+      </div>
+
+      <!-- ============================
+           SLIDE 25: Conjunctions
+      ============================= -->
+      <div class="slide slide-content">
+        <div class="slide-header">
+          <div class="slide-header-dot" style="background:var(--peach-deep)"></div>
+          <div class="slide-header-label" style="color:var(--peach-deep)">Conjunctions</div>
+          <div class="slide-header-title">Connecting Ideas — FANBOYS</div>
+        </div>
+        <div class="slide-body col">
+          <div class="def-box peach">
+            <p>A <strong>conjunction</strong> joins words, phrases, or sentences. The most common are the <strong>FANBOYS</strong>: coordinating conjunctions.</p>
+          </div>
+          <table class="grammar-table">
+            <thead><tr><th>Letter</th><th>Conjunction</th><th>Use</th><th>Islamic Example</th></tr></thead>
+            <tbody>
+              <tr><td><strong>F</strong></td><td class="code">For</td><td>reason</td><td>She rested, <em>for</em> she was tired after fasting.</td></tr>
+              <tr><td><strong>A</strong></td><td class="code">And</td><td>addition</td><td>I read Quran <em>and</em> made du'a.</td></tr>
+              <tr><td><strong>N</strong></td><td class="code">Nor</td><td>negative addition</td><td>She doesn't miss Fajr, <em>nor</em> does she miss Isha.</td></tr>
+              <tr><td><strong>B</strong></td><td class="code">But</td><td>contrast</td><td>She wanted to fast, <em>but</em> she was sick.</td></tr>
+              <tr><td><strong>O</strong></td><td class="code">Or</td><td>choice</td><td>You can read Quran <em>or</em> make dhikr.</td></tr>
+              <tr><td><strong>Y</strong></td><td class="code">Yet</td><td>contrast (formal)</td><td>It was difficult, <em>yet</em> she never gave up.</td></tr>
+              <tr><td><strong>S</strong></td><td class="code">So</td><td>result</td><td>It was Ramadan, <em>so</em> we fasted.</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-footer-left">Conjunctions — Units 150–153</div>
+          <div class="slide-footer-right">✦</div>
+        </div>
+      </div>
+
+      <!-- ============================
+           SLIDE 26: Interjections
+      ============================= -->
+      <div class="slide slide-content">
+        <div class="slide-header">
+          <div class="slide-header-dot" style="background:var(--peach-deep)"></div>
+          <div class="slide-header-label" style="color:var(--peach-deep)">Interjections</div>
+          <div class="slide-header-title">Expressing Emotion</div>
+        </div>
+        <div class="slide-body col">
+          <div class="def-box peach">
+            <p>An <strong>interjection</strong> is a word or phrase that expresses a sudden feeling or emotion. It is usually followed by <strong>!</strong> and stands alone or at the start of a sentence.</p>
+          </div>
+          <div class="slide-body row" style="padding:0;gap:clamp(8px,1.5%,16px);flex:1">
+            <div class="col-half">
+              <div class="content-subtitle" style="color:var(--peach-deep)">General Interjections</div>
+              <ul class="point-list">
+                <li><div class="point-dot" style="background:#fde8da;color:#c8703a">!</div><strong>Wow!</strong> — surprise or amazement</li>
+                <li><div class="point-dot" style="background:#fde8da;color:#c8703a">!</div><strong>Oops!</strong> — small mistake</li>
+                <li><div class="point-dot" style="background:#fde8da;color:#c8703a">!</div><strong>Oh!</strong> — realization or surprise</li>
+                <li><div class="point-dot" style="background:#fde8da;color:#c8703a">!</div><strong>Ouch!</strong> — pain</li>
+                <li><div class="point-dot" style="background:#fde8da;color:#c8703a">!</div><strong>Hmm…</strong> — thinking or hesitation</li>
+              </ul>
+            </div>
+            <div class="col-half">
+              <div class="islamic-box">
+                <div class="ib-label">🌙 Islamic Interjections</div>
+                <ul class="point-list" style="background:transparent;border:none">
+                  <li><div class="point-dot" style="background:#edf5ee;color:#7a9e7e">✦</div><strong>MashaAllah!</strong> — expressing admiration</li>
+                  <li><div class="point-dot" style="background:#edf5ee;color:#7a9e7e">✦</div><strong>Alhamdulillah!</strong> — gratitude to Allah</li>
+                  <li><div class="point-dot" style="background:#edf5ee;color:#7a9e7e">✦</div><strong>Astaghfirullah!</strong> — seeking forgiveness</li>
+                  <li><div class="point-dot" style="background:#edf5ee;color:#7a9e7e">✦</div><strong>SubhanAllah!</strong> — wonder & praise</li>
+                  <li><div class="point-dot" style="background:#edf5ee;color:#7a9e7e">✦</div><strong>InshaAllah!</strong> — if Allah wills</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-footer-left">Interjections — Parts of Speech</div>
+          <div class="slide-footer-right">✦</div>
+        </div>
+      </div>
+
+      <!-- ============================
+           SLIDE 27: FULL REVIEW
+      ============================= -->
+      <div class="slide slide-chapter ch-deep">
+        <div class="chapter-num">8</div>
+        <div class="chapter-tag" style="color:rgba(255,255,255,0.7)">Review</div>
+        <div class="chapter-title">All 8 Parts<br>of Speech</div>
+        <div class="chapter-desc">Let's put it all together!</div>
+      </div>
+
+      <!-- ============================
+           SLIDE 28: Summary
+      ============================= -->
+      <div class="slide slide-content">
+        <div class="slide-header">
+          <div class="slide-header-dot" style="background:var(--rose-dark)"></div>
+          <div class="slide-header-label" style="color:var(--rose-dark)">Summary</div>
+          <div class="slide-header-title">Quick Reference — All 8 Parts of Speech</div>
+        </div>
+        <div class="slide-body col" style="gap:clamp(4px,0.5%,8px)">
+          <table class="grammar-table">
+            <thead><tr><th>Part of Speech</th><th>What it does</th><th>🌙 Islamic Example</th></tr></thead>
+            <tbody>
+              <tr><td><strong style="color:var(--rose-dark)">Noun</strong></td><td>Names a person, place, thing, idea</td><td>Maryam, Makkah, sabr, Quran</td></tr>
+              <tr><td><strong style="color:var(--sage-deep)">Verb</strong></td><td>Shows action or state</td><td>pray, read, fast, is</td></tr>
+              <tr><td><strong style="color:var(--gold)">Adjective</strong></td><td>Describes a noun</td><td>kind, beautiful, generous, blessed</td></tr>
+              <tr><td><strong style="color:var(--lav-deep)">Adverb</strong></td><td>Describes verb / adjective / adverb</td><td>quietly, always, very, daily</td></tr>
+              <tr><td><strong style="color:var(--sky-deep)">Preposition</strong></td><td>Shows relationships (place, time)</td><td>in, on, at, after, before, beside</td></tr>
+              <tr><td><strong style="color:var(--peach-deep)">Determiner</strong></td><td>Comes before a noun</td><td>a, an, the, this, some, every</td></tr>
+              <tr><td><strong style="color:var(--mint-deep)">Pronoun</strong></td><td>Replaces a noun</td><td>I, she, we, they, it</td></tr>
+              <tr><td><strong style="color:#888">Linking Word</strong></td><td>Connects ideas</td><td>and, but, or, so, because</td></tr>
+            </tbody>
+          </table>
+          <div class="islamic-box" style="margin-top:auto">
+            <div class="ib-label">🌙 All 8 in one sentence</div>
+            <p><em style="color:var(--sage-deep)">"Alhamdulillah!</em> <em style="color:var(--mint-deep)">She</em> <em style="color:var(--sage-deep)">quietly</em> <em style="color:var(--sage-deep)">recited</em> <em style="color:var(--peach-deep)">the</em> <em style="color:var(--gold)">beautiful</em> <em style="color:var(--rose-dark)">Quran</em> <em style="color:var(--sky-deep)">in</em> <em style="color:var(--peach-deep)">the</em> <em style="color:var(--rose-dark)">masjid</em> <em style="color:#888">and</em> <em style="color:var(--mint-deep)">we</em> <em style="color:var(--sage-deep)">listened</em>."</p>
+          </div>
+        </div>
+        <div class="slide-footer">
+          <div class="slide-footer-left">English Basics 101 · Al-Muslimah English Course</div>
+          <div class="slide-footer-right">بِسْمِ اللَّهِ</div>
+        </div>
+      </div>
+
+    </div><!-- /slide-frame -->
+  </div><!-- /slide-area -->
+</div><!-- /main -->
+
+<div class="bottom-bar">
+  <button class="btn-nav" id="btn-prev" onclick="prevSlide()">← Prev</button>
+  <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
+  <div class="slide-num-display" id="slide-num-display">1 / 28</div>
+  <button class="btn-nav" id="btn-next" onclick="nextSlide()">Next →</button>
+  <div class="key-hint">← → keys</div>
+</div>
+
+<script>
+const slides = document.querySelectorAll('.slide');
+const totalSlides = slides.length;
+let current = 0;
+
+const slideData = [
+  { label: 'Cover' },
+  { label: 'Unit 1: Word Classes' },
+  { label: 'The 8 Word Classes' },
+  { label: 'Words in a Sentence' },
+  { label: 'One Word, Different Classes' },
+  { label: 'Unit 2: Sentence Structure' },
+  { label: 'Five Main Structures' },
+  { label: 'Adverbials' },
+  { label: 'Unit 3: Direct & Indirect Obj' },
+  { label: 'Two Objects after a Verb' },
+  { label: 'Nouns — Deep Dive' },
+  { label: 'Types of Nouns' },
+  { label: 'Verbs — Deep Dive' },
+  { label: 'Present Continuous' },
+  { label: 'Present Simple' },
+  { label: 'Adjectives — Deep Dive' },
+  { label: 'Describing Nouns' },
+  { label: 'Adverbs — Deep Dive' },
+  { label: 'Types of Adverbs' },
+  { label: 'Prepositions — Deep Dive' },
+  { label: 'Place & Time' },
+  { label: 'Pronouns — Deep Dive' },
+  { label: 'Personal Pronouns' },
+  { label: 'Conjunctions & Interjections' },
+  { label: 'FANBOYS' },
+  { label: 'Interjections' },
+  { label: 'Review: All 8 Parts' },
+  { label: 'Quick Reference' },
+];
+
+function buildSidebar() {
+  const sb = document.getElementById('sidebar');
+  let groups = [
+    { label: 'Intro', range: [0, 0] },
+    { label: 'Unit 1–3', range: [1, 9] },
+    { label: 'Nouns', range: [10, 11] },
+    { label: 'Verbs', range: [12, 14] },
+    { label: 'Adjectives', range: [15, 16] },
+    { label: 'Adverbs', range: [17, 18] },
+    { label: 'Prepositions', range: [19, 20] },
+    { label: 'Pronouns', range: [21, 22] },
+    { label: 'Conj & Interj', range: [23, 25] },
+    { label: 'Review', range: [26, 27] },
+  ];
+  groups.forEach(g => {
+    const sec = document.createElement('div');
+    sec.className = 'sidebar-section';
+    sec.textContent = g.label;
+    sb.appendChild(sec);
+    for (let i = g.range[0]; i <= g.range[1]; i++) {
+      const t = document.createElement('div');
+      t.className = 'thumb' + (i === 0 ? ' active' : '');
+      t.innerHTML = `<span class="thumb-num">${i+1}</span><span class="thumb-label">${slideData[i].label}</span>`;
+      t.onclick = () => goSlide(i);
+      sb.appendChild(t);
+    }
+  });
+}
+
+function updateUI() {
+  slides.forEach((s, i) => s.classList.toggle('active', i === current));
+  document.querySelectorAll('.thumb').forEach((t, i) => t.classList.toggle('active', i === current));
+  document.getElementById('progress-fill').style.width = ((current + 1) / totalSlides * 100) + '%';
+  document.getElementById('slide-num-display').textContent = `${current + 1} / ${totalSlides}`;
+  document.getElementById('counter-top').textContent = `${current + 1} / ${totalSlides}`;
+  document.getElementById('btn-prev').disabled = current === 0;
+  document.getElementById('btn-next').disabled = current === totalSlides - 1;
+  document.getElementById('btn-prev-top').disabled = current === 0;
+  document.getElementById('btn-next-top').disabled = current === totalSlides - 1;
+  // scroll sidebar thumb into view
+  const thumbs = document.querySelectorAll('.thumb');
+  if (thumbs[current]) thumbs[current].scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+}
+
+function nextSlide() { if (current < totalSlides - 1) { current++; updateUI(); } }
+function prevSlide() { if (current > 0) { current--; updateUI(); } }
+function goSlide(n) { current = n; updateUI(); }
+
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') nextSlide();
+  if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') prevSlide();
+  if (e.key === 'Home') goSlide(0);
+  if (e.key === 'End') goSlide(totalSlides - 1);
+});
+
+buildSidebar();
+updateUI();
+</script>
+</body>
+</html>

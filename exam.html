@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Exam Guide — English Basics 101</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --rose: #f2c4ce; --rose-deep: #d98fa0; --rose-dark: #a85f72;
+    --blush: #fdf0f3; --cream: #fdf8f4; --warm-white: #fffcfa;
+    --sage: #b5c9b7; --sage-deep: #7a9e7e; --sage-light: #edf5ee;
+    --gold: #d4a853; --gold-light: #f5e6c4; --gold-mid: #c49040;
+    --text-dark: #3a2a2e; --text-mid: #7a5c64; --text-light: #b08a93;
+    --border: #f0d8de;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'DM Sans', sans-serif; background: var(--cream); color: var(--text-dark); min-height: 100vh; }
+
+  nav {
+    background: var(--warm-white); border-bottom: 1px solid var(--border);
+    padding: 0 2rem; position: sticky; top: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between; height: 56px;
+  }
+  .nav-brand { font-family: 'Playfair Display', serif; font-size: 15px; color: var(--rose-dark); }
+  .nav-links { display: flex; gap: 1.5rem; }
+  .nav-links a { font-size: 13px; color: var(--text-mid); text-decoration: none; transition: color 0.2s; }
+  .nav-links a:hover, .nav-links a.active { color: var(--gold-mid); font-weight: 500; }
+
+  .hero {
+    background: var(--gold-light);
+    border-bottom: 1px solid #e8c97a;
+    padding: 4rem 2rem 3rem; text-align: center;
+  }
+  .session-badge {
+    display: inline-block; background: #e8c97a; color: var(--gold-mid);
+    font-size: 11px; font-weight: 500; letter-spacing: 0.1em;
+    text-transform: uppercase; padding: 4px 14px; border-radius: 20px; margin-bottom: 1rem;
+  }
+  .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(1.8rem, 4vw, 2.8rem); font-weight: 600; color: var(--text-dark); line-height: 1.2; margin-bottom: 0.5rem; }
+  .hero h1 em { font-style: italic; color: var(--gold-mid); }
+  .hero-sub { font-size: 14px; color: var(--text-light); }
+
+  .container { max-width: 860px; margin: 0 auto; padding: 3rem 2rem; }
+
+  .section-label { font-size: 11px; font-weight: 500; letter-spacing: 0.12em; text-transform: uppercase; color: var(--gold-mid); margin-bottom: 0.4rem; }
+  .section-title { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 600; color: var(--text-dark); margin-bottom: 1.5rem; }
+
+  .divider { display: flex; align-items: center; gap: 1rem; margin: 2.5rem 0; color: var(--text-light); font-size: 12px; }
+  .divider::before, .divider::after { content: ''; flex: 1; height: 1px; background: #e8c97a; }
+
+  /* EXAM CARDS */
+  .exam-compare { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 2rem; }
+  @media (max-width: 600px) { .exam-compare { grid-template-columns: 1fr; } }
+
+  .exam-card {
+    background: var(--warm-white);
+    border-radius: 16px;
+    overflow: hidden;
+  }
+  .exam-card.s1 { border: 2px solid var(--rose); }
+  .exam-card.s2 { border: 2px solid var(--sage); }
+
+  .exam-card-header {
+    padding: 1rem 1.2rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .exam-card.s1 .exam-card-header { background: var(--blush); }
+  .exam-card.s2 .exam-card-header { background: var(--sage-light); }
+
+  .exam-badge {
+    width: 32px; height: 32px; border-radius: 50%;
+    font-family: 'Playfair Display', serif; font-size: 14px; font-weight: 600;
+    display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+  }
+  .exam-card.s1 .exam-badge { background: var(--rose); color: var(--rose-dark); }
+  .exam-card.s2 .exam-badge { background: var(--sage); color: var(--sage-deep); }
+
+  .exam-card-header-text h3 { font-size: 14px; font-weight: 500; color: var(--text-dark); }
+  .exam-card-header-text p { font-size: 11px; color: var(--text-light); margin-top: 2px; }
+
+  .exam-card-body { padding: 1.2rem; }
+
+  .section-row {
+    display: grid; grid-template-columns: 1fr auto;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .section-row:last-child { border-bottom: none; }
+  .section-row .sr-label { color: var(--text-mid); line-height: 1.4; }
+  .section-row .sr-label span { display: block; font-size: 11px; color: var(--text-light); margin-top: 2px; }
+  .sr-pts {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem; font-weight: 600; color: var(--gold-mid);
+    white-space: nowrap; margin-left: 12px;
+  }
+  .sr-pts small { font-family: 'DM Sans', sans-serif; font-size: 10px; color: var(--text-light); font-weight: 400; }
+
+  .exam-total {
+    display: flex; justify-content: space-between; align-items: center;
+    background: var(--gold-light); border: 1px solid #e8c97a; border-radius: 10px;
+    padding: 0.8rem 1rem; margin-top: 1rem;
+  }
+  .exam-total .et-label { font-size: 12px; font-weight: 500; color: var(--gold-mid); text-transform: uppercase; letter-spacing: 0.06em; }
+  .exam-total .et-val { font-family: 'Playfair Display', serif; font-size: 1.3rem; font-weight: 600; color: var(--gold-mid); }
+
+  .passing-note {
+    font-size: 12px; color: var(--text-light); margin-top: 8px; text-align: center;
+  }
+
+  /* GRADING TABLE */
+  .grade-table { width: 100%; border-collapse: collapse; margin-bottom: 2rem; font-size: 14px; }
+  .grade-table th { text-align: left; padding: 10px 14px; background: var(--gold-light); color: var(--gold-mid); font-size: 11px; text-transform: uppercase; letter-spacing: 0.08em; font-weight: 500; }
+  .grade-table td { padding: 10px 14px; border-bottom: 1px solid var(--border); color: var(--text-mid); }
+  .grade-badge { display: inline-block; padding: 2px 10px; border-radius: 20px; font-size: 12px; font-weight: 500; }
+  .grade-a { background: var(--sage-light); color: var(--sage-deep); }
+  .grade-b { background: var(--gold-light); color: var(--gold-mid); }
+  .grade-c { background: var(--blush); color: var(--rose-dark); }
+  .grade-d { background: #f5f0f0; color: #b08888; }
+
+  /* TIPS */
+  .tips-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-bottom: 2rem; }
+  .tip-card {
+    background: var(--warm-white); border: 1px solid var(--border); border-radius: 12px;
+    padding: 1rem 1.2rem; font-size: 13px; color: var(--text-mid); line-height: 1.55;
+  }
+  .tip-card strong { display: block; color: var(--text-dark); font-size: 12px; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 6px; }
+
+  footer { text-align: center; padding: 2.5rem; border-top: 1px solid var(--border); background: var(--warm-white); font-size: 12px; color: var(--text-light); }
+  footer span { color: var(--gold-mid); }
+
+  .nav-pages { display: flex; justify-content: space-between; margin-top: 2rem; }
+  .nav-page-btn { display: inline-flex; align-items: center; gap: 8px; text-decoration: none; font-size: 13px; color: var(--gold-mid); background: var(--gold-light); border: 1px solid #e8c97a; padding: 8px 16px; border-radius: 8px; transition: background 0.2s; }
+  .nav-page-btn:hover { background: #e8c97a; }
+
+  /* CHECKLIST */
+  .checklist { list-style: none; margin-bottom: 1.5rem; }
+  .checklist li {
+    display: flex; align-items: flex-start; gap: 10px;
+    padding: 8px 0; border-bottom: 1px solid var(--border);
+    font-size: 14px; color: var(--text-mid); line-height: 1.55;
+  }
+  .checklist li:last-child { border-bottom: none; }
+  .check-dot {
+    width: 20px; height: 20px; background: var(--gold-light); border: 1px solid #e8c97a;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 10px; color: var(--gold-mid); flex-shrink: 0; margin-top: 2px;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">✦ English Basics 101</div>
+  <div class="nav-links">
+    <a href="index.html">Overview</a>
+    <a href="session1.html">Session 1</a>
+    <a href="session2.html">Session 2</a>
+    <a href="exam.html" class="active">Exams</a>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="session-badge">Assessment · Meetings 8 & 16</div>
+  <h1>Exam <em>Guide</em></h1>
+  <p class="hero-sub">Session 1 Exam & Final Exam — Formats, Scoring & Preparation Tips</p>
+</div>
+
+<div class="container">
+
+  <!-- EXAM COMPARE -->
+  <div class="section-label">Both Exams</div>
+  <div class="section-title">Exam Format Overview</div>
+
+  <div class="exam-compare">
+    <!-- S1 -->
+    <div class="exam-card s1">
+      <div class="exam-card-header">
+        <div class="exam-badge">8</div>
+        <div class="exam-card-header-text">
+          <h3>Session 1 Exam</h3>
+          <p>Meeting 8 · Noun, Pronoun, Adjective, Verb</p>
+        </div>
+      </div>
+      <div class="exam-card-body">
+        <div class="section-row">
+          <div class="sr-label">Section A<span>Identify the part of speech (underline / label)</span></div>
+          <div class="sr-pts">30 <small>pts</small></div>
+        </div>
+        <div class="section-row">
+          <div class="sr-label">Section B<span>Fill in the blank</span></div>
+          <div class="sr-pts">30 <small>pts</small></div>
+        </div>
+        <div class="section-row">
+          <div class="sr-label">Section C<span>Write your own sentences</span></div>
+          <div class="sr-pts">30 <small>pts</small></div>
+        </div>
+        <div class="section-row">
+          <div class="sr-label">Bonus<span>Islamic vocabulary challenge</span></div>
+          <div class="sr-pts">+10 <small>pts</small></div>
+        </div>
+        <div class="exam-total">
+          <span class="et-label">Total</span>
+          <span class="et-val">100 pts</span>
+        </div>
+        <p class="passing-note">Passing score: 60 / 100</p>
+      </div>
+    </div>
+
+    <!-- S2 / Final -->
+    <div class="exam-card s2">
+      <div class="exam-card-header">
+        <div class="exam-badge">16</div>
+        <div class="exam-card-header-text">
+          <h3>Final Exam</h3>
+          <p>Meeting 16 · All 8 Parts of Speech</p>
+        </div>
+      </div>
+      <div class="exam-card-body">
+        <div class="section-row">
+          <div class="sr-label">Section A<span>Identify the part of speech (underline / label)</span></div>
+          <div class="sr-pts">25 <small>pts</small></div>
+        </div>
+        <div class="section-row">
+          <div class="sr-label">Section B<span>Fill in the blank</span></div>
+          <div class="sr-pts">25 <small>pts</small></div>
+        </div>
+        <div class="section-row">
+          <div class="sr-label">Section C<span>Correct the sentence</span></div>
+          <div class="sr-pts">25 <small>pts</small></div>
+        </div>
+        <div class="section-row">
+          <div class="sr-label">Section D<span>Write a paragraph using all 8 parts of speech</span></div>
+          <div class="sr-pts">25 <small>pts</small></div>
+        </div>
+        <div class="exam-total">
+          <span class="et-label">Total</span>
+          <span class="et-val">100 pts</span>
+        </div>
+        <p class="passing-note">Passing score: 60 / 100</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="divider">✦</div>
+
+  <!-- GRADING SCALE -->
+  <div class="section-label">Results</div>
+  <div class="section-title">Grading Scale</div>
+  <table class="grade-table">
+    <thead>
+      <tr><th>Score</th><th>Grade</th><th>Note</th></tr>
+    </thead>
+    <tbody>
+      <tr><td>90 – 100</td><td><span class="grade-badge grade-a">Excellent</span></td><td>MashaAllah! ✨ — Outstanding work</td></tr>
+      <tr><td>75 – 89</td><td><span class="grade-badge grade-b">Good</span></td><td>Alhamdulillah! 🌸 — Great effort</td></tr>
+      <tr><td>60 – 74</td><td><span class="grade-badge grade-c">Pass</span></td><td>Keep going, you're on the right track!</td></tr>
+      <tr><td>Below 60</td><td><span class="grade-badge grade-d">Needs Review</span></td><td>A remedial session will be arranged to support you.</td></tr>
+    </tbody>
+  </table>
+
+  <div class="divider">✦</div>
+
+  <!-- WHAT TO STUDY -->
+  <div class="section-label">Preparation</div>
+  <div class="section-title">What to Review Before Each Exam</div>
+
+  <ul class="checklist">
+    <li><span class="check-dot">✦</span>Know the definition of each part of speech covered in the session</li>
+    <li><span class="check-dot">✦</span>Practice identifying parts of speech in simple sentences</li>
+    <li><span class="check-dot">✦</span>Review example sentences from class (especially Islamic context examples)</li>
+    <li><span class="check-dot">✦</span>Practice writing your own sentences for each part of speech</li>
+    <li><span class="check-dot">✦</span>For the Final Exam: review all 8 parts of speech and how they work together in a paragraph</li>
+    <li><span class="check-dot">✦</span>Review your worksheet answers and any feedback from the teacher</li>
+  </ul>
+
+  <div class="divider">✦</div>
+
+  <!-- TIPS -->
+  <div class="section-label">Advice</div>
+  <div class="section-title">Exam Tips</div>
+  <div class="tips-grid">
+    <div class="tip-card">
+      <strong>Read carefully</strong>
+      Read each question fully before answering. Don't rush — the exam is not timed by section.
+    </div>
+    <div class="tip-card">
+      <strong>Start with what you know</strong>
+      Answer the questions you're confident about first, then return to harder ones.
+    </div>
+    <div class="tip-card">
+      <strong>Use your examples</strong>
+      If you forget a rule, think of the example sentences from class (Islamic ones are fine!).
+    </div>
+    <div class="tip-card">
+      <strong>Say Bismillah</strong>
+      Start your exam with Bismillah and trust in your preparation. You've worked hard!
+    </div>
+    <div class="tip-card">
+      <strong>For writing sections</strong>
+      Write naturally — short, clear sentences are better than long, confusing ones.
+    </div>
+    <div class="tip-card">
+      <strong>No grade is the end</strong>
+      If you need a remedial session, that's perfectly okay. Growth is what matters most.
+    </div>
+  </div>
+
+  <div class="nav-pages">
+    <a href="session2.html" class="nav-page-btn">← Session 2</a>
+    <a href="index.html" class="nav-page-btn">Back to Overview →</a>
+  </div>
+
+</div>
+
+<footer>
+  <p>English Basics 101 · <span>Al-Muslimah English Course</span> · Exam Guide</p>
+  <p style="margin-top: 4px;">بِسْمِ اللَّهِ الرَّحْمَنِ الرَّحِيمِ</p>
+</footer>
+
+</body>
+</html>
